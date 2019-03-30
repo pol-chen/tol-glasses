@@ -51,8 +51,8 @@ table {
 
 html {
   font-family: Helvetica, Arial, sans-serif;
-  background: #FFFBF0;
-  color: #262626;
+  background: #FAF6EE;
+  color: #565957;
   font-family: 'Merriweather', serif;
 }
 
@@ -68,11 +68,11 @@ header {
 h1 {
   font-family: 'Lobster', cursive;
   font-size: 36px;
-  color: #000000;
+  color: #565957;
 }
 
 h1 span {
-  color: #26A69A;
+  color: #4CBBD8;
 }
 
 p.desc {
@@ -94,7 +94,7 @@ main {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #FAEFD0;
+  background: #F6F2E6;
   opacity: 1;
 }
 
@@ -113,7 +113,7 @@ main {
   width: auto;
   padding: 12px 18px;
   display: inline-block;
-  background: #26A69A;
+  background: #4CBBD8;
   color: #FFFFFF;
   font-size: 20px;
   text-align: center;
@@ -122,7 +122,7 @@ main {
   transition: .3s all ease-in-out;
 }
 .scene a:hover {
-  background: #117B71;
+  background: #2C9DBA;
 }
 .scene a.btn-hidden {
   display: none;
@@ -143,7 +143,7 @@ main {
 
 .scene .icon i {
   height: 120px;
-  color: #26A69A;
+  color: #4CBBD8;
   font-size: 120px;
 }
 
@@ -156,7 +156,7 @@ main {
   margin-bottom: 24px;
   font-family: 'Lobster', cursive;
   font-size: 36px;
-  color: #000000;
+  color: #565957;
   text-align: center;
 }
 
@@ -188,7 +188,7 @@ main {
   width: 80%;
   height: 100%;
   margin: 0 12px;
-  /* border: 3px solid #26A69A; */
+  /* border: 3px solid #4CBBD8; */
   border-radius: 8px;
   box-sizing: border-box;
 }
@@ -199,13 +199,13 @@ main {
 
 .scene .gallery .option {
   display: flex;
-  border: 3px solid #FFFBF0;
-  background: #FFFBF0;
+  border: 3px solid #FAF6EE;
+  background: #FAF6EE;
   cursor: pointer;
 }
 
 .scene .gallery .option-selected {
-  border: 3px solid #26A69A;
+  border: 3px solid #4CBBD8;
 }
 
 .scene .gallery .option p {
@@ -217,7 +217,7 @@ main {
 }
 
 .scene .gallery .option p span {
-  color: #26A69A;
+  color: #4CBBD8;
 }
 
 .scene .gallery-v {
@@ -237,11 +237,11 @@ main {
   margin-bottom: 24px;
   padding: 12px;
   background: #FFFFFF;
-  color: #262626;
+  color: #565957;
   font-family: 'Merriweather', serif;
   font-size: 16px;
   line-height: 28px;
-  border: 3px solid #26A69A;
+  border: 3px solid #4CBBD8;
   border-radius: 8px;
   outline: 0;
 }
@@ -294,14 +294,14 @@ footer {
   background: white;
   box-sizing: border-box;
   border-radius: 100%;
-  border: 10px solid #26A69A;
+  border: 10px solid #4CBBD8;
   margin: auto;
 }
 .clock .top {
   position: absolute;
   width: 3px;
   height: 8px;
-  background: #262626;
+  background: #565957;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -310,7 +310,7 @@ footer {
   position: absolute;
   width: 8px;
   height: 3px;
-  background: #262626;
+  background: #565957;
   top: 0;
   bottom: 0;
   right: 0;
@@ -320,7 +320,7 @@ footer {
   position: absolute;
   width: 3px;
   height: 8px;
-  background: #262626;
+  background: #565957;
   left: 0;
   right: 0;
   bottom: 0;
@@ -330,7 +330,7 @@ footer {
   position: absolute;
   width: 8px;
   height: 3px;
-  background: #262626;
+  background: #565957;
   top: 0;
   bottom: 0;
   left: 0;
@@ -345,7 +345,7 @@ footer {
   top: 0;
   bottom: 0;
   margin: auto;
-  background: #262626;
+  background: #565957;
   border-radius: 100%;
 }
 .clock .shadow {
@@ -369,7 +369,7 @@ footer {
 .clock .hour:before {
   position: absolute;
   content: "";
-  background: #262626;
+  background: #565957;
   height: 60px;
   width: 3px;
   top: 30px;
@@ -386,7 +386,7 @@ footer {
 .clock .minute:before {
   position: absolute;
   content: "";
-  background: #262626;
+  background: #565957;
   height: 40px;
   width: 1px;
   top: 50px;
