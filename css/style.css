@@ -211,6 +211,9 @@ main {
 .scene .gallery.timeline {
   height: 102px;
 }
+.scene .gallery.select-disabled .option {
+  cursor: default;
+}
 
 .scene .gallery .frame {
   width: 80%;
@@ -236,6 +239,17 @@ main {
 
 .scene .gallery .option-selected {
   border: 3px solid #4CBBD8;
+}
+
+.scene .gallery .option h3 {
+  margin-bottom: 12px;
+  color: #4CBBD8;
+  font-size: 36px;
+}
+
+.scene .gallery .option h3 span {
+  color: #565957;
+  font-size: 16px;
 }
 
 .scene .gallery .option p {
