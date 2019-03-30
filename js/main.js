@@ -114,6 +114,18 @@ function jumpScene(el) {
     $(to).fadeIn();
   });
 }
+function showScene(target) {
+  var $scene = $('.scene:visible');
+  if ($scene.length == 0) {
+    console.log('SHOW', target);
+    $(target).show();
+  } else {
+    $('.scene:visible').fadeOut(function () {
+      console.log('FADE IN', target);
+      $(target).fadeIn();
+    });
+  }
+}
 
 function triggerScenePizza() {
   pauseVideo();
@@ -129,15 +141,47 @@ function triggerSceneEnd() {
   startScene('#scene-end');
 }
 
+// Firebase Functions
+
+function login(email, password) {
+  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log('LOGIN', errorCode, errorMessage);
+  });
+}
+
+function signup(email, password) {
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log('SIGNUP', errorCode, errorMessage);
+  });
+}
+
+function logout() {
+  firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+    console.log('LOGOUT');
+  }).catch(function(error) {
+    // An error happened.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log('LOGOUT', errorCode, errorMessage);
+  });
+}
+
+function isLoggedIn() {
+  return !!firebase.auth().currentUser;
+}
+
 $(document).ready(function () {
   showBoard();
-  $('#scene-start').show();
+  $('#scene-blank').show();
 
-  $('.btn-start').click(function () {
-    // hideBoard();
-    // playVideo();
-    // startScene('#scene-title');
-  })
+  // Global Events
   $('.btn-continue').click(function () {
     if (!$(this).hasClass('btn-disabled')) {
       continueScene(this);
@@ -182,4 +226,44 @@ $(document).ready(function () {
       $btn.removeClass('btn-disabled');
     }
   })
+
+  $('#btn-login').click(function () {
+    var email = $('#input-login-email').val();
+    var password = $('#input-login-password').val();
+    console.log('LOGIN', email, password);
+    login(email, password);
+  })
+  $('#btn-signup').click(function () {
+    var email = $('#input-signup-email').val();
+    var password = $('#input-signup-password').val();
+    console.log('SIGNUP', email, password);
+    signup(email, password);
+  })
+  $('#btn-logout').click(function () {
+    logout();
+  })
+
+  $('.btn-start').click(function () {
+    console.log('START');
+    if (isLoggedIn()) {
+      showScene('#scene-join');
+    } else {
+      showScene('#scene-login');
+    }
+  })
+
+  // Listen State Change
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      console.log('USER');
+      // Check Status
+      console.log('CHECK STATUS');
+      showScene('#scene-join');
+    } else {
+      // No user is signed in.
+      console.log('USER NULL');
+      showScene('#scene-start');
+    }
+  });
 })
