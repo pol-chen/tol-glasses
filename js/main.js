@@ -310,7 +310,7 @@ $(document).ready(function () {
         showSceneByStatus(user.status);
       }, function() {
         console.log('INIT USER');
-        addUser(auth);
+        initUser(auth);
         showSceneByStatus(0);
       });
 
