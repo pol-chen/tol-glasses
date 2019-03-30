@@ -19,6 +19,32 @@
         <audio id="sound" src="sounds/sound.mov" preload="auto"></audio>
         <audio id="ending" src="sounds/ending.mov" preload="auto"></audio>
         <div id="board">
+          <div id="scene-login" class="scene">
+            <div class="icon icon-s">
+              <i class="fas fa-user"></i>
+            </div>
+            <h2>Log In</h2>
+            <p>To start the course, you need to log in first. If you don't have an account, click <a class="btn-inline btn-jump" data-to="#scene-signup">here</a> to create your account.</p>
+            <form class="">
+              <input type="text" name="" value="" placeholder="Email">
+              <input type="password" name="" value="" placeholder="Password">
+            </form>
+            <a class="btn-continue" data-next="#scene-title-pasta"><i class="fas fa-sign-in-alt"></i>Log In</a>
+          </div>
+
+          <div id="scene-signup" class="scene">
+            <div class="icon icon-s">
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <h2>Sign Up</h2>
+            <p>Create your account to start the course. If you already have an account, click <a class="btn-inline btn-jump" data-to="#scene-login">here</a> to log in.</p>
+            <form class="">
+              <input type="text" name="" value="" placeholder="Email">
+              <input type="password" name="" value="" placeholder="Password">
+            </form>
+            <a class="btn-continue" data-next="#scene-title-pasta"><i class="fas fa-user-plus"></i>Sign Up</a>
+          </div>
+
           <div id="scene-start" class="scene">
             <div class="icon">
               <i class="fas fa-book"></i>

@@ -107,6 +107,13 @@ function endScene(el) {
     playVideo();
   });
 }
+function jumpScene(el) {
+  var to = $(el).data('to');
+  console.log(to);
+  $(el).closest('.scene').fadeOut(function () {
+    $(to).fadeIn();
+  });
+}
 
 function triggerScenePizza() {
   pauseVideo();
@@ -124,7 +131,7 @@ function triggerSceneEnd() {
 
 $(document).ready(function () {
   showBoard();
-  $('#scene-start').show();
+  $('#scene-login').show();
 
   $('.btn-start').click(function () {
     // hideBoard();
@@ -135,6 +142,9 @@ $(document).ready(function () {
     if (!$(this).hasClass('btn-disabled')) {
       continueScene(this);
     }
+  })
+  $('.btn-jump').click(function () {
+    jumpScene(this);
   })
   $('.btn-end').click(function () {
     endScene(this);

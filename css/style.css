@@ -137,6 +137,20 @@ main {
   padding-right: 6px;
 }
 
+.scene a.btn-inline {
+  padding: 0;
+  display: inline;
+  color: #4CBBD8;
+  background: none;
+  font-size: inherit;
+  border-radius: 0;
+  border-bottom: #4CBBD8 1px solid;
+}
+.scene a.btn-inline:hover {
+  color: #2C9DBA;
+  border-bottom: #2C9DBA 1px solid;
+}
+
 .scene .icon {
   margin-bottom: 24px;
 }
@@ -145,6 +159,11 @@ main {
   height: 120px;
   color: #4CBBD8;
   font-size: 120px;
+}
+
+.scene .icon-s i {
+  height: 64px;
+  font-size: 64px;
 }
 
 .scene .icon-alert i {
@@ -232,9 +251,10 @@ main {
   margin: 3px 0;
 }
 
-.scene textarea {
+.scene textarea,
+.scene input {
   width: 80%;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   padding: 12px;
   background: #FFFFFF;
   color: #565957;
@@ -244,6 +264,11 @@ main {
   border: 3px solid #4CBBD8;
   border-radius: 8px;
   outline: 0;
+}
+
+.scene textarea:last-child,
+.scene input:last-child {
+  margin-bottom: 24px;
 }
 
 .heating:after {
