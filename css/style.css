@@ -50,10 +50,10 @@ table {
 /*CUSTOM CODE*/
 
 html {
-  font-family: Helvetica, Arial, sans-serif;
   background: #FAF6EE;
   color: #565957;
-  font-family: 'Merriweather', serif;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-weight: 300;
 }
 
 .wrapper {
@@ -66,7 +66,7 @@ header {
 }
 
 h1 {
-  font-family: 'Lobster', cursive;
+  font-family: 'Dosis', sans-serif;
   font-size: 36px;
   color: #565957;
 }
@@ -154,7 +154,7 @@ main {
 .scene h2 {
   width: 540px;
   margin-bottom: 24px;
-  font-family: 'Lobster', cursive;
+  font-family: 'Dosis', sans-serif;
   font-size: 36px;
   color: #565957;
   text-align: center;
@@ -238,7 +238,7 @@ main {
   padding: 12px;
   background: #FFFFFF;
   color: #565957;
-  font-family: 'Merriweather', serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 28px;
   border: 3px solid #4CBBD8;
