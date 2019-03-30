@@ -154,7 +154,16 @@ function showSceneByStatus(status) {
   showScene('#scene-' + scenes[status]);
 }
 
-// Auth Functions
+// Template
+
+function buildOptionTeam(tid, name, icon) {
+  return '<div class="frame option" data-next="' + tid + '">\
+    <p><i class="fas fa-' + icon + '"></i></p>\
+    <p>Team ' + name + '</p>\
+  </div>';
+}
+
+// Auth
 
 function login(email, password) {
   firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
@@ -190,22 +199,24 @@ function isLoggedIn() {
   return !!firebase.auth().currentUser;
 }
 
-// Firestore Functions
+// User
+
+var userDoc;
 
 function getUser(uid, success, fail) {
   var db = firebase.firestore();
-  var userRef = db.collection('users').where('uid', '==', uid);
-  userRef.get().then(function(doc) {
-    console.log(doc);
-    if (!doc.empty) {
-      console.log("Document data:", doc.docs);
-      success(doc.docs[0].data());
+  var usersRef = db.collection('users').where('uid', '==', uid);
+  usersRef.get().then(function(res) {
+    if (!res.empty) {
+      console.log('Document data:', res.docs);
+      userDoc = res.docs[0];
+      success(userDoc.data());
     } else {
-      console.log("No such document!");
+      console.log('No such document!');
       fail();
     }
   }).catch(function(error) {
-    console.log("Error getting document:", error);
+    console.log('Error getting document:', error);
   });
 }
 
@@ -220,6 +231,53 @@ function initUser(auth) {
     console.log('Document written with ID:', docRef.id);
   }).catch(function(error) {
     console.error('Error adding document:', error);
+  });
+}
+
+function updateStatus() {
+  var db = firebase.firestore();
+  var userRef = db.collection('users').doc(userDoc.id);
+  var status = userDoc.data().status + 1;
+  return userRef.update({
+    status: status
+  }).then(function() {
+    console.log('Document successfully updated!');
+    showSceneByStatus(status)
+  }).catch(function(error) {
+    console.error('Error updating document:', error);
+  });
+}
+
+// Team
+var teamDocs = [];
+function getTeams(success) {
+  var db = firebase.firestore();
+  var teamsRef = db.collection('teams');
+  teamsRef.get().then(function(res) {
+    if (!res.empty) {
+      console.log('Document data:', res.docs);
+      // teams = doc.docs.map(function(doc) {
+      //   return doc.data();
+      // });
+      teamDocs = res.docs;
+      success(teamDocs);
+    } else {
+      console.log('No such document!');
+    }
+  }).catch(function(error) {
+    console.log('Error getting document:', error);
+  });
+}
+
+function joinTeam(tid, uid) {
+  var db = firebase.firestore();
+  var teamRef = db.collection('teams').doc(tid);
+  return teamRef.update({
+    members: firebase.firestore.FieldValue.arrayUnion(uid)
+  }).then(function() {
+    console.log('Document successfully updated!');
+  }).catch(function(error) {
+    console.error('Error updating document:', error);
   });
 }
 
@@ -247,19 +305,19 @@ $(document).ready(function () {
       twitterWindow.focus();
     }
   })
-  $('.select .option').click(function () {
+  $('.select').on('click', '.option', function () {
     var $select = $(this).parent('.select');
     if (!$select.hasClass('select-disabled')) {
       $select.find('.option').removeClass('option-selected');
       $(this).addClass('option-selected');
 
-      var $btn = $select.parent('.scene').find('.btn-continue');
+      var $btn = $select.parent('.scene').children('a');
       $btn.removeClass('btn-disabled');
 
       var next = $(this).data('next');
       if (next) {
         var target = $select.data('target');
-        var $btnTarget = $(target).find('.btn-continue');
+        var $btnTarget = $(target).children('a');
         $btnTarget.data('next', next);
       }
     }
@@ -297,6 +355,25 @@ $(document).ready(function () {
       showScene('#scene-login');
     }
   })
+
+  $('#btn-join').click(function () {
+    console.log('JOIN');
+    var tid = $(this).data('next');
+    var uid = firebase.auth().currentUser.uid;
+    if (joinTeam(tid, uid)) {
+      console.log('JOIN', tid, uid);
+      updateStatus();
+    } else {
+      console.log('JOIN NULL');
+    }
+  })
+
+  getTeams(function(teamDocs) {
+    teamDocs.forEach(function(teamDoc) {
+      var team = teamDoc.data();
+      $('#scene-join .select').append(buildOptionTeam(teamDoc.id, team.name, team.icon));
+    });
+  });
 
   // Listen user state change
   firebase.auth().onAuthStateChanged(function(auth) {
