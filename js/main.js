@@ -131,7 +131,7 @@ function triggerSceneEnd() {
 
 $(document).ready(function () {
   showBoard();
-  $('#scene-joined').show();
+  $('#scene-learned').show();
 
   $('.btn-start').click(function () {
     // hideBoard();
