@@ -218,6 +218,8 @@ main {
 
 .scene .gallery .option {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   border: 3px solid #FAF6EE;
   background: #FAF6EE;
   cursor: pointer;
@@ -231,8 +233,13 @@ main {
   align-self: center;
   width: 100%;
   margin: 0;
-  padding: 6px;
+  padding: 0 6px;
   box-sizing: border-box;
+}
+
+.scene .gallery .option p i {
+  color: #4CBBD8;
+  font-size: 24px;
 }
 
 .scene .gallery .option p span {
