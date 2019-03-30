@@ -121,6 +121,123 @@
             <a class="btn-continue" data-next="#scene-title-pasta"><i class="fas fa-comments"></i>Discuss</a>
           </div>
 
+          <div id="scene-discussed" class="scene">
+            <div class="icon icon-s">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <h2>Practice Time!!!</h2>
+            <p>Let's do some practice to see if you master your part about how glasses work after discussion!</p>
+            <a class="btn-continue" data-next="#scene-question-1"><i class="fas fa-arrow-circle-right"></i>Continue</a>
+          </div>
+
+          <div id="scene-question-1" class="scene scene-question">
+            <h2>Question 1</h2>
+            <p>Microwaves are electric waves that could NOT penetrate?</p>
+            <div class="gallery gallery-v select" data-target="#scene-question-1">
+              <div class="frame option" data-next="#scene-wrong-1">
+                <p>A. Food</p>
+              </div>
+              <div class="frame option" data-next="#scene-wrong-1">
+                <p>B. Ceramics</p>
+              </div>
+              <div class="frame option" data-next="#scene-wrong-1">
+                <p>C. Glass</p>
+              </div>
+              <div class="frame option" data-next="#scene-correct-1">
+                <p>D. Metal</p>
+              </div>
+            </div>
+            <a class="btn-continue btn-disabled" data-next="#scene-wrong-1"><i class="fas fa-arrow-circle-right"></i>Continue</a>
+          </div>
+          <div id="scene-correct-1" class="scene scene-feedback">
+            <div class="icon">
+              <i class="far fa-check-circle"></i>
+            </div>
+            <h2>Correct!</h2>
+            <p>Yes, Microwaves are electromagnetic waves that could penetrate food, plastics, ceramics, glass, but will be reflected by metals.</p>
+            <a class="btn-continue" data-next="#scene-question-2"><i class="fas fa-arrow-circle-right"></i>Continue</a>
+          </div>
+          <div id="scene-wrong-1" class="scene scene-feedback">
+            <div class="icon icon-alert">
+              <i class="far fa-times-circle"></i>
+            </div>
+            <h2>Incorrect</h2>
+            <p>Microwaves are electromagnetic waves that could penetrate food, plastics, ceramics, glass, but will be reflected by metals.</p>
+            <a class="btn-continue" data-next="#scene-question-2"><i class="fas fa-arrow-circle-right"></i>Continue</a>
+          </div>
+
+          <div id="scene-question-2" class="scene scene-question">
+            <h2>Question 2</h2>
+            <p>How does the microwave heat the food?</p>
+            <div class="gallery gallery-v select" data-target="#scene-question-2">
+              <div class="frame option" data-next="#scene-correct-2">
+                <p>A. Activating the water molecules in the food.</p>
+              </div>
+              <div class="frame option" data-next="#scene-wrong-2">
+                <p>B. Heat the air inside the microwave oven.</p>
+              </div>
+              <div class="frame option" data-next="#scene-wrong-2">
+                <p>C. Heat the container of the food and then conduct the heat to the food.</p>
+              </div>
+              <div class="frame option" data-next="#scene-wrong-2">
+                <p>D. Activating the proteins in the food.</p>
+              </div>
+            </div>
+            <a class="btn-continue btn-disabled" data-next=""><i class="fas fa-arrow-circle-right"></i>Continue</a>
+          </div>
+          <div id="scene-correct-2" class="scene scene-feedback">
+            <div class="icon">
+              <i class="far fa-check-circle"></i>
+            </div>
+            <h2>Correct!</h2>
+            <p>Yes, microwaves heat food by activating the polar molecules, majorly water molecules.</p>
+            <a class="btn-continue" data-next="#scene-question-3"><i class="fas fa-arrow-circle-right"></i>Continue</a>
+          </div>
+          <div id="scene-wrong-2" class="scene scene-feedback">
+            <div class="icon icon-alert">
+              <i class="far fa-times-circle"></i>
+            </div>
+            <h2>Incorrect</h2>
+            <p>Microwaves heat food by activating the polar molecules, majorly water molecules, but not all the molecules in the food.<br>The food containers are not heated.<br>It is the conventional oven that heats food by heating the air inside the microwave oven, not the microwave oven.</p>
+            <a class="btn-continue" data-next="#scene-question-3"><i class="fas fa-arrow-circle-right"></i>Continue</a>
+          </div>
+
+          <div id="scene-question-3" class="scene scene-question">
+            <h2>Question 3</h2>
+            <p>In what order does the microwave heat the food?</p>
+            <div class="gallery gallery-v select" data-target="#scene-question-3">
+              <div class="frame option" data-next="#scene-wrong-3">
+                <p>A. Heat the inside first then the outside.</p>
+              </div>
+              <div class="frame option" data-next="#scene-wrong-3">
+                <p>B. Heat the outside first then the inside.</p>
+              </div>
+              <div class="frame option" data-next="#scene-correct-3">
+                <p>C. Heat all parts at the same time.</p>
+              </div>
+              <div class="frame option" data-next="#scene-wrong-3">
+                <p>D. Heat in a random order.</p>
+              </div>
+            </div>
+            <a class="btn-continue btn-disabled" data-next=""><i class="fas fa-arrow-circle-right"></i>Continue</a>
+          </div>
+          <div id="scene-correct-3" class="scene scene-feedback">
+            <div class="icon">
+              <i class="far fa-check-circle"></i>
+            </div>
+            <h2>Correct!</h2>
+            <p>Yes, microwaves heat all the water molecules in the food at the same time. So it heats all parts of the food at the same time.</p>
+            <a class="btn-continue" data-next="#scene-end"><i class="fas fa-arrow-circle-right"></i>Continue</a>
+          </div>
+          <div id="scene-wrong-3" class="scene scene-feedback">
+            <div class="icon icon-alert">
+              <i class="far fa-times-circle"></i>
+            </div>
+            <h2>Incorrect</h2>
+            <p>There is a common misconception that microwave ovens heat food from the inside out. However, actually microwaves heat all the water molecules in the food at the same time. So it heats all parts of the food at the same time.<br>It is the conventional oven that heats food by heating the air and conduct the heat from the outside of the food to the inside, not the microwave oven.</p>
+            <a class="btn-continue" data-next="#scene-end"><i class="fas fa-arrow-circle-right"></i>Continue</a>
+          </div>
+
           <div id="scene-start" class="scene">
             <div class="icon">
               <i class="fas fa-book"></i>
