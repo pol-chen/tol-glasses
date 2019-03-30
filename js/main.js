@@ -131,7 +131,7 @@ function triggerSceneEnd() {
 
 $(document).ready(function () {
   showBoard();
-  $('#scene-end').show();
+  $('#scene-start').show();
 
   $('.btn-start').click(function () {
     // hideBoard();
