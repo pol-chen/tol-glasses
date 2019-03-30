@@ -201,7 +201,6 @@ function getUser(uid, success, fail) {
       console.log("Document data:", doc.docs);
       success(doc.docs[0].data());
     } else {
-      // doc.data() will be undefined in this case
       console.log("No such document!");
       fail();
     }
@@ -210,11 +209,12 @@ function getUser(uid, success, fail) {
   });
 }
 
-function addUser(uid) {
-  console.log('USER ADD', uid);
+function initUser(auth) {
+  console.log('USER ADD', auth.uid);
   var db = firebase.firestore();
   db.collection('users').add({
-    uid: uid,
+    uid: auth.uid,
+    email: auth.email,
     status: 0
   }).then(function(docRef) {
     console.log('Document written with ID:', docRef.id);
@@ -310,7 +310,7 @@ $(document).ready(function () {
         showSceneByStatus(user.status);
       }, function() {
         console.log('INIT USER');
-        addUser(auth.uid);
+        addUser(auth);
         showSceneByStatus(0);
       });
 
