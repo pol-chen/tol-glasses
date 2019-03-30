@@ -131,7 +131,7 @@ function triggerSceneEnd() {
 
 $(document).ready(function () {
   showBoard();
-  $('#scene-join').show();
+  $('#scene-joined').show();
 
   $('.btn-start').click(function () {
     // hideBoard();
@@ -157,18 +157,22 @@ $(document).ready(function () {
       twitterWindow.focus();
     }
   })
-  $('.option').click(function () {
-    $(this).parent('.gallery').find('.option').removeClass('option-selected');
-    $(this).addClass('option-selected');
-  })
   $('.select .option').click(function () {
-    var $btn = $(this).parent('.select').parent('.scene').find('.btn-continue');
-    $btn.removeClass('btn-disabled');
+    var $select = $(this).parent('.select');
+    if (!$select.hasClass('select-disabled')) {
+      $select.find('.option').removeClass('option-selected');
+      $(this).addClass('option-selected');
 
-    var next = $(this).data('next');
-    var target = $(this).parent('.select').data('target');
-    var $btnTarget = $(target).find('.btn-continue');
-    $btnTarget.data('next', next);
+      var $btn = $select.parent('.scene').find('.btn-continue');
+      $btn.removeClass('btn-disabled');
+
+      var next = $(this).data('next');
+      if (next) {
+        var target = $select.data('target');
+        var $btnTarget = $(target).find('.btn-continue');
+        $btnTarget.data('next', next);
+      }
+    }
   })
   $('.input-answer').on('change keyup paste', function() {
     var $btn = $(this).parent('.scene').find('.btn-continue');
