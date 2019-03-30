@@ -131,7 +131,7 @@ function triggerSceneEnd() {
 
 $(document).ready(function () {
   showBoard();
-  $('#scene-quizzed').show();
+  $('#scene-end').show();
 
   $('.btn-start').click(function () {
     // hideBoard();
@@ -150,8 +150,8 @@ $(document).ready(function () {
     endScene(this);
   })
   $('.btn-share').click(function () {
-    var url = "https://polarischen.github.io/tol-microwave/";
-    var text = "Do you know how microwave ovens work? Check this out! 😉";
+    var url = "https://polarischen.github.io/tol-glasses/";
+    var text = "Do you know how glasses work? Check this out! 😎";
     var twitterWindow = window.open('https://twitter.com/share?url=' + url + '&text=' + text, 'twitter-popup', 'height=350, width=600');
     if (twitterWindow.focus) {
       twitterWindow.focus();
