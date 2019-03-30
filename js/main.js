@@ -141,7 +141,20 @@ function triggerSceneEnd() {
   startScene('#scene-end');
 }
 
-// Firebase Functions
+function showSceneByStatus(status) {
+  var scenes = [
+    'join',
+    'joined',
+    'learned',
+    'discussed',
+    'practiced',
+    'taught',
+    'quizzed'
+  ];
+  showScene('#scene-' + scenes[status]);
+}
+
+// Auth Functions
 
 function login(email, password) {
   firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
@@ -175,6 +188,39 @@ function logout() {
 
 function isLoggedIn() {
   return !!firebase.auth().currentUser;
+}
+
+// Firestore Functions
+
+function getUser(uid, success, fail) {
+  var db = firebase.firestore();
+  var userRef = db.collection('users').where('uid', '==', uid);
+  userRef.get().then(function(doc) {
+    console.log(doc);
+    if (!doc.empty) {
+      console.log("Document data:", doc.docs);
+      success(doc.docs[0].data());
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+      fail();
+    }
+  }).catch(function(error) {
+    console.log("Error getting document:", error);
+  });
+}
+
+function addUser(uid) {
+  console.log('USER ADD', uid);
+  var db = firebase.firestore();
+  db.collection('users').add({
+    uid: uid,
+    status: 0
+  }).then(function(docRef) {
+    console.log('Document written with ID:', docRef.id);
+  }).catch(function(error) {
+    console.error('Error adding document:', error);
+  });
 }
 
 $(document).ready(function () {
@@ -252,17 +298,25 @@ $(document).ready(function () {
     }
   })
 
-  // Listen State Change
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-      console.log('USER');
-      // Check Status
-      console.log('CHECK STATUS');
-      showScene('#scene-join');
+  // Listen user state change
+  firebase.auth().onAuthStateChanged(function(auth) {
+    if (auth) {
+      // User is logged in
+      console.log('AUTH', auth);
+      // Check User
+      getUser(auth.uid, function(user) {
+        // Check Status
+        console.log('CHECK STATUS', user);
+        showSceneByStatus(user.status);
+      }, function() {
+        console.log('INIT USER');
+        addUser(auth.uid);
+        showSceneByStatus(0);
+      });
+
     } else {
-      // No user is signed in.
-      console.log('USER NULL');
+      // No user is logged in
+      console.log('AUTH NULL');
       showScene('#scene-start');
     }
   });
