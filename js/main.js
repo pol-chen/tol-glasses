@@ -398,6 +398,13 @@ function updateTeamIcon(icon) {
 function updateTeamInfo() {
   var team = teamDoc.data();
   updateTeamIcon(team.icon);
+  if (team.discussAt) {
+    console.log('TIME', team.discussAt);
+    $('.discuss-time').text(new Date(team.discussAt.seconds * 1000).toString());
+  }
+  if (team.teachAt) {
+    $('.teach-time').text(new Date(team.teachAt.seconds * 1000).toString());
+  }
   if (team.score) {
     $('#score').text(team.score);
   }
