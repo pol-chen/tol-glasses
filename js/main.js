@@ -95,12 +95,15 @@ function continueScene(el) {
   var next = $(el).data('next');
   console.log(next);
   $(el).parent('.scene').fadeOut(function () {
+    if (next.includes('scene-correct') || next.includes('scene-wrong')) {
+      loadPracticeFeedback();
+    }
     $(next).fadeIn(function () {
       if (next.includes('scene-timer')) {
-        document.getElementById('sound').play();
-        setTimeout(continueScene, 4000, $(next).find('.btn-continue'));
+        // document.getElementById('sound').play();
+        // setTimeout(continueScene, 4000, $(next).find('.btn-continue'));
       } else if (next.includes('scene-end')) {
-        document.getElementById('ending').play();
+        // document.getElementById('ending').play();
       }
     });
   });
@@ -169,6 +172,15 @@ function buildOptionTeam(tid, name, icon) {
   return '<div class="frame option" data-next="' + tid + '">\
     <p><i class="fas fa-' + icon + '"></i></p>\
     <p>Team ' + name + '</p>\
+  </div>';
+}
+
+function buildOptionQuestion(op, i) {
+  var feedback = op.correct ? 'correct' : 'wrong';
+  var nums = ['A', 'B', 'C', 'D'];
+  var num = nums[i];
+  return '<div class="frame option" data-next="#scene-' + feedback + '-p">\
+    <p>' + num + '. ' + op.desc + '</p>\
   </div>';
 }
 
@@ -364,6 +376,89 @@ function learn() {
   endScene();
 }
 
+// Practice
+var questionDocs;
+var practices;
+var currentPractice = 0;
+var quizzes;
+function getQuestions() {
+  // Get questions from cloud
+  loadPractice(); // Init first question
+  console.log('Practice');
+}
+
+function loadPractice() {
+  console.log('Load');
+  practices = [{
+    desc: 'Apple',
+    image: '',
+    options: [
+      {
+        desc: 'Food',
+        correct: false
+      },
+      {
+        desc: 'Ceramics',
+        correct: false
+      },
+      {
+        desc: 'Glass',
+        correct: false
+      },
+      {
+        desc: 'Metal',
+        correct: true
+      }
+    ],
+    feedbacks: [
+      'NO',
+      'YES'
+    ],
+    part: 2
+  },{
+    desc: 'Banana',
+    image: '',
+    options: [
+      {
+        desc: 'Food2',
+        correct: false
+      },
+      {
+        desc: 'Ceramics2',
+        correct: false
+      },
+      {
+        desc: 'Glass2',
+        correct: false
+      },
+      {
+        desc: 'Metal2',
+        correct: true
+      }
+    ],
+    feedbacks: [
+      'NO2',
+      'YES2'
+    ],
+    part: 1
+  }];
+
+  var p = practices[currentPractice++];
+  $('#scene-question-p h2').text('Question ' + currentPractice);
+  $('#scene-question-p p').text(p.desc);
+  $('#scene-question-p .select').empty();
+  p.options.forEach(function(option, i) {
+    console.log(option, i);
+    $('#scene-question-p .select').append(buildOptionQuestion(option, i));
+  });
+}
+
+function loadPracticeFeedback() {
+  var p = practices[currentPractice-1];
+  $('#scene-wrong-p p').text(p.feedbacks[0]);
+  $('#scene-correct-p p').text(p.feedbacks[1]);
+}
+
 $(document).ready(function () {
   showBoard();
   $('#scene-blank').show();
@@ -372,6 +467,14 @@ $(document).ready(function () {
   $('.btn-continue').click(function () {
     if (!$(this).hasClass('btn-disabled')) {
       continueScene(this);
+    }
+  })
+  $('.btn-continue-p').click(function () {
+    if (currentPractice == practices.length) {
+      showScene('#scene-practiced');
+    } else {
+      showScene('#scene-question-p');
+      loadPractice();
     }
   })
   $('.btn-jump').click(function () {
@@ -447,6 +550,7 @@ $(document).ready(function () {
       updateUserTeam(tid);
       schedule(tid);
       getTeam(tid, getPart);
+      getQuestions();
     } else {
       console.log('JOIN NULL');
     }
@@ -490,7 +594,7 @@ $(document).ready(function () {
         showSceneByStatus(user.status);
         if (user.status > 0) {
           getTeam(user.tid, getPart);
-          // getPractice();
+          getQuestions();
         }
       }, function() {
         console.log('INIT USER');
