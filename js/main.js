@@ -200,6 +200,12 @@ function buildOptionQuestionQ(op, i) {
   </div>';
 }
 
+function buildOptionChecklist(item) {
+  return '<div class="frame option">\
+    <p><span><i class="far fa-circle"></i></span>' + item + '</p>\
+  </div>';
+}
+
 // Auth
 
 function login(email, password) {
@@ -398,6 +404,8 @@ function getPart(teamDoc) {
   var index = team.members.indexOf(uid);
   part = team.assign[index];
   console.log('PART', part);
+
+  updateChecklist(part);
 }
 
 function updateTeamIcon(icon) {
@@ -660,6 +668,35 @@ function calculateRanking() {
   $('#ranking').text(ranking);
 
   updateTeamRanking(ranking);
+}
+
+// Checklist
+
+var checklists = [
+  [
+    'Eye structure',
+    'What causes blurry vision',
+    'Differences between myopic and hyperopia'
+  ], [
+    'Different types of lenses',
+    'How do lenses change the path of light',
+    'Application of lenses to help improve vision'
+  ]
+];
+
+function updateChecklist(part) {
+  var mine = part - 1;
+  var other = mine == 1 ? 0 : 1;
+  loadChecklist('#checklist-discuss', checklists[mine]);
+  loadChecklist('#checklist-teach-1', checklists[mine]);
+  loadChecklist('#checklist-teach-2', checklists[other]);
+}
+
+function loadChecklist(el, items) {
+  $(el).empty();
+  items.forEach(function(item) {
+    $(el).append(buildOptionChecklist(item));
+  });
 }
 
 $(document).ready(function () {
