@@ -8,11 +8,12 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
 var player;
+var videoIds = ['1thS_9B88tk', 'Zjgv-J6M4SQ', 'WeN2vdZZ5G0'];
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
     height: '640',
     width: '900',
-    videoId: '0N9McnK2kh0',
+    videoId: videoIds[0],
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange
@@ -61,7 +62,11 @@ function onPlayerStateChange(event) {
     // setTimeout(triggerScenePizza, 6000);
     done = true;
   } else if (event.data == YT.PlayerState.ENDED) {
-    setTimeout(triggerSceneLearning, 0);
+    if (player.getVideoData()['video_id'] == videoIds[0]) {
+      triggerSceneIniting();
+    } else {
+      triggerSceneLearning();
+    }
   }
 }
 function playVideo() {
@@ -133,20 +138,10 @@ function showScene(target, prep) {
   }
 }
 
-function triggerScenePizza() {
-  pauseVideo();
+function triggerSceneIniting() {
   showBoard();
-  startScene('#scene-title-pizza');
+  startScene('#scene-initing');
 }
-function triggerScenePractice() {
-  showBoard();
-  startScene('#scene-title-practice');
-}
-function triggerSceneEnd() {
-  showBoard();
-  startScene('#scene-end');
-}
-
 function triggerSceneLearning() {
   showBoard();
   startScene('#scene-learning');
@@ -154,6 +149,7 @@ function triggerSceneLearning() {
 
 function showSceneByStatus(status) {
   var scenes = [
+    'init',
     'join',
     'joined',
     'learned',
@@ -474,9 +470,13 @@ function schedule(tid) {
   });
 }
 
+function init() {
+  updateVideo(videoIds[0]);
+  endScene();
+}
+
 function learn() {
-  var videoIds = ['0N9McnK2kh0', '0N9McnK2kh0'];
-  updateVideo(videoIds[part - 1]);
+  updateVideo(videoIds[part]);
   endScene();
 }
 
@@ -1060,11 +1060,21 @@ $(document).ready(function () {
       }
     }
   })
+  $('#btn-init').click(function () {
+    console.log('INIT');
+    init();
+  })
+  $('#btn-init-replay').click(function () {
+    init();
+  })
+  $('#btn-inited').click(function () {
+    updateStatus();
+  })
   $('#btn-learn').click(function () {
     console.log('LEARN');
     learn();
   })
-  $('#btn-replay').click(function () {
+  $('#btn-learn-replay').click(function () {
     learn();
   })
   $('#btn-learned').click(function () {
@@ -1101,7 +1111,7 @@ $(document).ready(function () {
         // Check status
         console.log('CHECK STATUS', user);
         showSceneByStatus(user.status);
-        if (user.status > 0) {
+        if (user.status > 1) {
           getTeam(user.tid, getPart);
         }
       }, function() {
