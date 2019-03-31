@@ -539,6 +539,7 @@ function loadPractice() {
   var p = practices[currentPractice++];
   $('#scene-question-p h2').text('Question ' + currentPractice);
   $('#scene-question-p p').text(p.desc);
+  $('#scene-question-p .btn-continue').addClass('btn-disabled');
   $('#scene-question-p .select').empty();
   p.options.forEach(function(option, i) {
     console.log(option, i);
@@ -612,6 +613,7 @@ function loadQuiz() {
   var p = quizzes[currentQuiz++];
   $('#scene-question-q h2').text('Question ' + currentQuiz);
   $('#scene-question-q p').text(p.desc);
+  $('#scene-question-q .btn-continue').addClass('btn-disabled');
   $('#scene-question-q .select').empty();
   p.options.forEach(function(option, i) {
     console.log(option, i);
@@ -732,7 +734,7 @@ $(document).ready(function () {
     console.log('SIGNUP', email, password);
     signup(email, password);
   })
-  $('#btn-logout').click(function () {
+  $('.btn-logout').click(function () {
     logout();
   })
   $('.btn-start').click(function () {
