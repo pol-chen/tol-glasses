@@ -548,9 +548,25 @@ function loadQuizFeedback() {
   $('#scene-correct-q p').text(p.feedbacks[1]);
 }
 
+// Score
+
 var score = 0;
-function countPoint () {
+var total = 2;
+function countPoint() {
   score++;
+}
+
+function calculateScore() {
+  var teammate = getRandomInt(0, total);
+  console.log('SCORE TEAMMATE', teammate);
+  var avg = (score + teammate) / 2.0;
+  $('#score').text(avg);
+}
+
+function calculateRanking() {
+  var ranking = getRandomInt(1, 9);
+  console.log('SCORE RANKING', ranking);
+  $('#ranking').text(ranking);
 }
 
 $(document).ready(function () {
@@ -670,6 +686,14 @@ $(document).ready(function () {
   })
   $('#btn-learned').click(function () {
     updateStatus();
+  })
+
+  $('#btn-score').click(function () {
+    calculateScore();
+  })
+  $('#btn-ranking').click(function () {
+    calculateRanking();
+    $('#scene-quizzed a').removeClass('btn-disabled');
   })
 
   getTeams(function(teamDocs) {
