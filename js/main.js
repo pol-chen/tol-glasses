@@ -723,6 +723,27 @@ $(document).ready(function () {
       }
     }
   })
+  $('.select-checklist').on('click', '.option', function () {
+    var $select = $(this).parent('.select');
+    $(this).toggleClass('option-selected');
+    if ($(this).hasClass('option-selected')) {
+      $(this).find('i').removeClass('fa-circle');
+      $(this).find('i').addClass('fa-check-circle');
+    } else {
+      $(this).find('i').removeClass('fa-check-circle');
+      $(this).find('i').addClass('fa-circle');
+    }
+
+    var optionsSelected = $select.find('.option-selected');
+    var options = $select.find('.option');
+    var $btn = $select.parent('.scene').children('a');
+    if (optionsSelected.length == options.length) {
+      $btn.removeClass('btn-disabled');
+    } else {
+      $btn.addClass('btn-disabled');
+    }
+
+  })
   $('.input-answer').on('change keyup paste', function() {
     var $btn = $(this).parent('.scene').find('.btn-continue');
     if ($(this).val().length === 0) {

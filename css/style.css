@@ -282,6 +282,36 @@ main {
   margin: 3px 0;
 }
 
+.scene .gallery-v .option {
+  display: flex;
+  flex-direction: row;
+}
+
+.scene .gallery.select-checklist .option {
+  width: 80%;
+  cursor: pointer;
+}
+
+.scene .select-checklist .option p {
+  padding: 6px;
+  color: #565957;
+  text-align: left;
+}
+.scene .select-checklist .option p i {
+  position: relative;
+  bottom: -3px;
+  display: inline-block;
+  padding: 0 6px;
+  color: #565957;
+}
+.scene .select-checklist .option-selected {
+  background-color: #4CBBD8;
+}
+.scene .select-checklist .option-selected p,
+.scene .select-checklist .option-selected p i {
+  color: #FAF6EE;
+}
+
 .scene textarea,
 .scene input {
   width: 80%;
