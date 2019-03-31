@@ -61,7 +61,7 @@ function onPlayerStateChange(event) {
     // setTimeout(triggerScenePizza, 6000);
     done = true;
   } else if (event.data == YT.PlayerState.ENDED) {
-    setTimeout(triggerScenePractice, 0);
+    setTimeout(triggerSceneLearning, 0);
   }
 }
 function playVideo() {
@@ -143,6 +143,11 @@ function triggerScenePractice() {
 function triggerSceneEnd() {
   showBoard();
   startScene('#scene-end');
+}
+
+function triggerSceneLearning() {
+  showBoard();
+  startScene('#scene-learning');
 }
 
 function showSceneByStatus(status) {
@@ -353,6 +358,12 @@ function schedule(tid) {
   });
 }
 
+function learn() {
+  var videoIds = ['0N9McnK2kh0', '0N9McnK2kh0'];
+  updateVideo(videoIds[part - 1]);
+  endScene();
+}
+
 $(document).ready(function () {
   showBoard();
   $('#scene-blank').show();
@@ -442,11 +453,14 @@ $(document).ready(function () {
   })
   $('#btn-learn').click(function () {
     console.log('LEARN');
-    var videoIds = ['0N9McnK2kh0', '0N9McnK2kh0'];
-    updateVideo(videoIds[part - 1]);
-    endScene();
+    learn();
   })
-
+  $('#btn-replay').click(function () {
+    learn();
+  })
+  $('#btn-learned').click(function () {
+    updateStatus();
+  })
 
   getTeams(function(teamDocs) {
     var $teamSelect = $('#scene-join .select');
