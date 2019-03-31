@@ -281,6 +281,36 @@ function joinTeam(tid, uid) {
   });
 }
 
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function addZero(n) {
+  return n < 10 ? '0' + n : '' + n;
+}
+
+var teamSchedule;
+function schedule(tid) {
+  var rand = getRandomInt(1, 2);
+  var left = rand == 1 ? 2 : 1;
+  var now = new Date();
+  var date = now.getFullYear() + '-' + addZero(now.getMonth() + 1) + '-' + addZero(now.getDate() + (now.getHours() >= 18 ? 1 : 0));
+  var discussAt = new Date(date + 'T19:00:00');
+  var teachAt = new Date(date + 'T20:00:00');
+  var data = {
+    assign: [rand, left],
+    discussAt: discussAt,
+    teachAt: teachAt
+  };
+  teamSchedule = data;
+  var db = firebase.firestore();
+  var teamRef = db.collection('teams').doc(tid);
+  return teamRef.update(data).then(function() {
+    console.log('Document successfully updated!');
+  }).catch(function(error) {
+    console.error('Error updating document:', error);
+  });
+}
+
 $(document).ready(function () {
   showBoard();
   $('#scene-blank').show();
@@ -363,6 +393,7 @@ $(document).ready(function () {
     if (joinTeam(tid, uid)) {
       console.log('JOIN', tid, uid);
       updateStatus();
+      schedule(tid);
     } else {
       console.log('JOIN NULL');
     }
@@ -382,6 +413,8 @@ $(document).ready(function () {
     });
   });
 
+  // getQuiz();
+
   // Listen user state change
   firebase.auth().onAuthStateChanged(function(auth) {
     if (auth) {
@@ -392,6 +425,10 @@ $(document).ready(function () {
         // Check Status
         console.log('CHECK STATUS', user);
         showSceneByStatus(user.status);
+        if (user.status > 0) {
+          // getTeam();
+          // getPractice();
+        }
       }, function() {
         console.log('INIT USER');
         initUser(auth);
