@@ -283,6 +283,18 @@ function updateStatus() {
   });
 }
 
+function updateScore(score) {
+  var db = firebase.firestore();
+  var userRef = db.collection('users').doc(userDoc.id);
+  return userRef.update({
+    score: score
+  }).then(function() {
+    console.log('User score successfully updated!');
+  }).catch(function(error) {
+    console.error('Error updating user score:', error);
+  });
+}
+
 function updateUserTeam(tid) {
   var db = firebase.firestore();
   var userRef = db.collection('users').doc(userDoc.id);
@@ -316,6 +328,22 @@ function getTeams(success) {
   });
 }
 
+function updateTeams(teamDocs) {
+  console.log('updateTeams', teamDocs);
+  var $teamSelect = $('#scene-join .select');
+  $teamSelect.empty();
+  var count = 0;
+  var max = 4;
+  teamDocs.forEach(function(teamDoc) {
+    var team = teamDoc.data();
+    console.log(team);
+    if (count <= max && team.members.length == 1) {
+      $teamSelect.append(buildOptionTeam(teamDoc.id, team.name, team.icon));
+      count++;
+    }
+  });
+}
+
 function joinTeam(tid, uid) {
   var db = firebase.firestore();
   var teamRef = db.collection('teams').doc(tid);
@@ -343,7 +371,7 @@ function getTeam(tid, success) {
     if (doc.exists) {
       console.log('TEAM', doc.data());
       teamDoc = doc;
-      updateTeamIcon(doc.data().icon);
+      updateTeamInfo();
       success(teamDoc);
     } else {
       console.log('No such team!');
@@ -365,6 +393,42 @@ function getPart(teamDoc) {
 function updateTeamIcon(icon) {
   var i = '<i class="fas fa-' + icon + '"></i>';
   $('.icon-team').html(i);
+}
+
+function updateTeamInfo() {
+  var team = teamDoc.data();
+  updateTeamIcon(team.icon);
+  if (team.score) {
+    $('#score').text(team.score);
+  }
+  if (team.ranking) {
+    $('#ranking').text(team.ranking);
+    $('#scene-quizzed a').removeClass('btn-disabled');
+  }
+}
+
+function updateTeamScore(score) {
+  var db = firebase.firestore();
+  var teamRef = db.collection('teams').doc(teamDoc.id);
+  return teamRef.update({
+    score: score,
+  }).then(function() {
+    console.log('Team score successfully updated!');
+  }).catch(function(error) {
+    console.error('Error updating team score:', error);
+  });
+}
+
+function updateTeamRanking(ranking) {
+  var db = firebase.firestore();
+  var teamRef = db.collection('teams').doc(teamDoc.id);
+  return teamRef.update({
+    ranking: ranking,
+  }).then(function() {
+    console.log('Team ranking successfully updated!');
+  }).catch(function(error) {
+    console.error('Error updating team ranking:', error);
+  });
 }
 
 function schedule(tid) {
@@ -565,14 +629,18 @@ function countPoint() {
 function calculateScore() {
   var teammate = getRandomInt(0, total);
   console.log('SCORE TEAMMATE', teammate);
-  var avg = (score + teammate) / 2.0;
+  var avg = (score + teammate).toFixed(1) / 2.0;
   $('#score').text(avg);
+
+  updateTeamScore(avg);
 }
 
 function calculateRanking() {
   var ranking = getRandomInt(1, 9);
   console.log('SCORE RANKING', ranking);
   $('#ranking').text(ranking);
+
+  updateTeamRanking(ranking);
 }
 
 $(document).ready(function () {
@@ -588,7 +656,7 @@ $(document).ready(function () {
   $('.btn-continue-p').click(function () {
     if (currentPractice == practices.length) {
       showScene('#scene-practiced');
-      // Update status
+      updateStatus();
     } else {
       showScene('#scene-question-p');
       loadPractice();
@@ -597,8 +665,8 @@ $(document).ready(function () {
   $('.btn-continue-q').click(function () {
     if (currentQuiz == quizzes.length) {
       showScene('#scene-quizzed');
-      // Update status
-      // Upload score;
+      updateStatus();
+      updateScore(score);
       console.log('SCORE', score);
     } else {
       showScene('#scene-question-q');
@@ -693,7 +761,12 @@ $(document).ready(function () {
   $('#btn-learned').click(function () {
     updateStatus();
   })
-
+  $('#btn-discussed').click(function () {
+    updateStatus();
+  })
+  $('#btn-taught').click(function () {
+    updateStatus();
+  })
   $('#btn-score').click(function () {
     calculateScore();
   })
@@ -702,30 +775,17 @@ $(document).ready(function () {
     $('#scene-quizzed a').removeClass('btn-disabled');
   })
 
-  getTeams(function(teamDocs) {
-    var $teamSelect = $('#scene-join .select');
-    $teamSelect.empty();
-    var count = 0;
-    var max = 4;
-    teamDocs.forEach(function(teamDoc) {
-      var team = teamDoc.data();
-      if (count <= max && team.members.length == 1) {
-        $teamSelect.append(buildOptionTeam(teamDoc.id, team.name, team.icon));
-        count++;
-      }
-    });
-  });
-
-  // getQuiz();
-
   // Listen user state change
   firebase.auth().onAuthStateChanged(function(auth) {
     if (auth) {
       // User is logged in
       console.log('AUTH', auth);
-      // Check User
+      // Get teams
+      getTeams(updateTeams);
+
+      // Check user
       getUser(auth.uid, function(user) {
-        // Check Status
+        // Check status
         console.log('CHECK STATUS', user);
         showSceneByStatus(user.status);
         if (user.status > 0) {
