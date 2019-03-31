@@ -195,6 +195,9 @@ main {
   color: #4CBBD8;
   font-weight: 400;
 }
+.scene p img {
+  width: 100%;
+}
 
 .scene .small {
   margin-bottom: 12px;

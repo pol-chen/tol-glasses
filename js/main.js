@@ -565,7 +565,7 @@ var practices = [
     ]
   }, {
     desc: 'The picture on the left shows the light path when there is no lenses. If we put a concave lens there, as the right picture shows, where would the light focus?',
-    image: '',
+    image: 'question-1.png',
     options: [
       {
         desc: 'Point A',
@@ -585,7 +585,7 @@ var practices = [
     ]
   }, {
     desc: 'In the picture below, light passes through a lens in the box and changes its path. Do you know which type of lens it is?',
-    image: 'question-p-3.jpg',
+    image: 'question-2.png',
     options: [
       {
         desc: 'Concave',
@@ -623,6 +623,10 @@ function loadPractice() {
   var p = practicesMine[currentPractice++];
   $('#scene-question-p h2').text('Question ' + currentPractice);
   $('#scene-question-p p').text(p.desc);
+  if (p.image.length >= 0) {
+    console.log(p.image);
+    $('#scene-question-p p').append('<img src="images/' + p.image + '" alt="">');
+  }
   $('#scene-question-p .btn-continue').addClass('btn-disabled');
   $('#scene-question-p .select').empty();
   p.options.forEach(function(option, i) {
@@ -720,7 +724,7 @@ var quizzes = [{
   ]
 }, {
   desc: 'The picture on the left shows the light path when there is no lenses. If we put a concave lens there, as the right picture shows, where would the light focus?',
-  image: '',
+  image: 'question-1.png',
   options: [
     {
       desc: 'Point A',
@@ -740,7 +744,7 @@ var quizzes = [{
   ]
 }, {
   desc: 'Which of the following images correctly matches the name of the lens, and how could the lens help with eyes?',
-  image: '',
+  image: 'question-3.png',
   options: [
     {
       desc: 'A',
@@ -820,7 +824,7 @@ var quizzes = [{
   ]
 }, {
   desc: 'In the picture below, light passes through a lens in the box and changes its path. Do you know which type of lens it is?',
-  image: '',
+  image: 'question-2.png',
   options: [
     {
       desc: 'Concave',
@@ -861,7 +865,7 @@ function loadQuiz() {
 // Score
 
 var score = 0;
-var total = 2;
+var total = 10;
 function countPoint() {
   score++;
 }
@@ -876,7 +880,7 @@ function calculateScore() {
 }
 
 function calculateRanking() {
-  var ranking = getRandomInt(1, 9);
+  var ranking = getRandomInt(1, 4);
   console.log('SCORE RANKING', ranking);
   $('#ranking').text(ranking);
 
