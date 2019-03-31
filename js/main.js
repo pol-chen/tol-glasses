@@ -544,63 +544,63 @@ var practices = [
     ]
   }],
   [{
-    desc: 'When light from a object reaches our eyes, which part(s) of the eye refracts the light?',
+    desc: 'Which of the following is correct regarding how glasses help with vision?',
     image: '',
     options: [
       {
-        desc: 'Cornea and Lens',
+        desc: 'Glasses refracts the light passing through it to help the light focused perfectly on the retina.',
         correct: true,
-        feedback: 'Correct! When light from a object reaches our eyes, the cornea and lens refracts the light.'
+        feedback: 'Correct! By adjusting where the light get focused, the lens could improve blurry vision. When the light gets focused exactly on the retina, the eye will have perfect vision.'
       },
       {
-        desc: 'Retina',
+        desc: 'Glasses makes the light brighter.',
         correct: false,
-        feedback: 'Try again! Retina does not refract light, it is where light get focused in a person who has perfect vision'
+        feedback: 'Try again! Lenses do not affect the brightness of light. It helps with vision by changing the path of light.'
       },
       {
-        desc: 'Glass',
+        desc: 'Glasses always expand light so that the light gets closer to the retina.',
         correct: false,
-        feedback: 'Try again! Light enters the eye through the pupil, but pupil does not refracts light'
+        feedback: 'Not quite! Glasses with concave lens will do so and help with myopic eyes. However glasses with convex lens do the opposite and help with hyperopia by narrowing the light.'
       }
     ]
   }, {
-    desc: 'In order to have perfect vision, where does light need to be focused in the eye?',
+    desc: 'The picture on the left shows the light path when there is no lenses. If we put a concave lens there, as the right picture shows, where would the light focus?',
     image: '',
     options: [
       {
-        desc: 'In between lens and retina',
+        desc: 'Point A',
         correct: false,
-        feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision'
+        feedback: 'This is a concave lens, and it expands light passing through. Thus the light wouldn’t be focus at Point A.'
       },
       {
-        desc: 'Cornea and Lens',
+        desc: 'Point B',
         correct: false,
-        feedback: 'Try again! Cornea and lens are where light gets refracted, not where light gets focused in order to have perfect vision'
+        feedback: 'This is a concave lens, and it expands light passing through. Therefore the light will be refracted and won’t be focused at Point B anymore.'
       },
       {
-        desc: 'Retina',
+        desc: 'Point C',
         correct: true,
-        feedback: 'Good job! In a person who has perfect vision, the refracted light is actually focused on the retina'
+        feedback: 'Right! This is a concave lens, and it expands light passing through. Thus the light would focus at Point C. Good job!'
       }
     ]
   }, {
-    desc: 'When light get focused before the retina, what will it cause?',
-    image: '',
+    desc: 'In the picture below, light passes through a lens in the box and changes its path. Do you know which type of lens it is?',
+    image: 'question-p-3.jpg',
     options: [
       {
-        desc: 'Hyperopia and hypermetropia',
+        desc: 'Concave',
         correct: false,
-        feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision'
+        feedback: 'Ooops! The light is narrowed, and not expanded. If the light is expanded, and the lens should be concave lens.'
       },
       {
-        desc: 'Myopia',
+        desc: 'Convex',
         correct: true,
-        feedback: 'Good job! Myopia is also called nearsightedness, which causes blurry vision when looking at distant objects'
+        feedback: 'You did it! Since the light is narrowed, we can infer that the lens in the box is a convex one. Good job!'
       },
       {
-        desc: 'Farsightedness',
+        desc: 'Either Concave or Convex will have same effect',
         correct: false,
-        feedback: 'Try again! Try again! Farsightedness is also called hyperopia or hypermetropia, which is the defect when light gets focused behind the retina'
+        feedback: 'Try again! Convex lens and concave lens change the path of light differently, only one type of lens would be correct.'
       }
     ]
   }]
@@ -639,6 +639,26 @@ function loadPractice() {
 // Quiz
 
 var quizzes = [{
+  desc: 'If our friend, Bred, has myopic eyes, which type of lens does he need?',
+  image: '',
+  options: [
+    {
+      desc: 'Concave',
+      correct: true,
+      feedback: 'Well done! Concave lenses are used to correct myopic eyes. Convex ones are used for farsightedness people, and flat ones does not have correction effects.'
+    },
+    {
+      desc: 'Convex',
+      correct: false,
+      feedback: 'Ooops! Actually, convex lenses are used for farsightedness. Since our friend has myopic eyes, which is nearsightedness, we need to use concave lenses.'
+    },
+    {
+      desc: 'Both Concave and Convex would work',
+      correct: false,
+      feedback: 'Ooops!  Actually, convex lenses are used for farsightedness. Since our friend has myopic eyes, which is nearsightedness, only concave lenses would help.'
+    }
+  ]
+}, {
   desc: 'When light from a object reaches our eyes, which part(s) of the eye refracts the light?',
   image: '',
   options: [
@@ -650,12 +670,12 @@ var quizzes = [{
     {
       desc: 'Retina',
       correct: false,
-      feedback: 'Try again! Retina does not refract light, it is where light get focused in a person who has perfect vision'
+      feedback: 'Try again! Retina does not refract light, it is where light get focused in a person who has perfect vision.'
     },
     {
-      desc: 'Glass',
+      desc: 'Pupil',
       correct: false,
-      feedback: 'Try again! Light enters the eye through the pupil, but pupil does not refracts light'
+      feedback: 'Try again! Light enters the eye through the pupil, but pupil does not refracts light.'
     }
   ]
 }, {
@@ -663,19 +683,19 @@ var quizzes = [{
   image: '',
   options: [
     {
-      desc: 'In between lens and retina',
+      desc: 'In between lens and retina.',
       correct: false,
-      feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision'
+      feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision.'
     },
     {
       desc: 'Cornea and Lens',
       correct: false,
-      feedback: 'Try again! Cornea and lens are where light gets refracted, not where light gets focused in order to have perfect vision'
+      feedback: 'Try again! Cornea and lens are where light gets refracted, not where light gets focused in order to have perfect vision.'
     },
     {
       desc: 'Retina',
       correct: true,
-      feedback: 'Good job! In a person who has perfect vision, the refracted light is actually focused on the retina'
+      feedback: 'Good job! In a person who has perfect vision, the refracted light is actually focused on the retina.'
     }
   ]
 }, {
@@ -685,17 +705,137 @@ var quizzes = [{
     {
       desc: 'Hyperopia and hypermetropia',
       correct: false,
-      feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision'
+      feedback: 'Try again! Hyperopia or hypermetropia is also called farsightedness, which is the defect when light gets focused behind the retina'
     },
     {
       desc: 'Myopia',
       correct: true,
-      feedback: 'Good job! Myopia is also called nearsightedness, which causes blurry vision when looking at distant objects'
+      feedback: 'Good job! Myopia is also called nearsightedness, which causes blurry vision when looking at distant objects.'
     },
     {
       desc: 'Farsightedness',
       correct: false,
-      feedback: 'Try again! Try again! Farsightedness is also called hyperopia or hypermetropia, which is the defect when light gets focused behind the retina'
+      feedback: 'Try again! Try again! Farsightedness is also called hyperopia or hypermetropia, which is the defect when light gets focused behind the retina.'
+    }
+  ]
+}, {
+  desc: 'The picture on the left shows the light path when there is no lenses. If we put a concave lens there, as the right picture shows, where would the light focus?',
+  image: '',
+  options: [
+    {
+      desc: 'Point A',
+      correct: false,
+      feedback: 'This is a concave lens, and it expands light passing through. Thus the light wouldn’t be focus at Point A.'
+    },
+    {
+      desc: 'Point B',
+      correct: false,
+      feedback: 'This is a concave lens, and it expands light passing through. Therefore the light will be refracted and won’t be focused at Point B anymore.'
+    },
+    {
+      desc: 'Point C',
+      correct: true,
+      feedback: 'Right! This is a concave lens, and it expands light passing through. Thus the light would focus at Point C. Good job!'
+    }
+  ]
+}, {
+  desc: 'Which of the following images correctly matches the name of the lens, and how could the lens help with eyes?',
+  image: '',
+  options: [
+    {
+      desc: 'A',
+      correct: false,
+      feedback: 'Not quite right, try again! It is true that the image shows a convex lens, however, convex lens does not help with myopia.'
+    },
+    {
+      desc: 'B',
+      correct: true,
+      feedback: 'Good job! It is a concave lens and it helps with myopia.'
+    },
+    {
+      desc: 'C',
+      correct: false,
+      feedback: 'Ooops! The images shown is a convex lens, which help with hyperopia, not myopia.'
+    }
+  ]
+}, {
+  desc: 'Our grandma Rose has trouble seeing objects and words close up, in her case, which of the following is correct?',
+  image: '',
+  options: [
+    {
+      desc: 'Grandma Rose has myopic eyes.',
+      correct: false,
+      feedback: 'Try again! If grandma Rose has myopic eyes, then she would have trouble seeing distance objects.'
+    },
+    {
+      desc: 'Grandma Rose has farsightedness.',
+      correct: true,
+      feedback: 'Good job! In this case, the light passing through her eyes gets focused behind the retina, which causes farsightedness'
+    },
+    {
+      desc: 'The light passing through Grandma Rose gets focused before her retina.',
+      correct: false,
+      feedback: 'Try again! If the light gets focused before the retina, then grandma Rose would be able to see objects close up clearly.'
+    }
+  ]
+}, {
+  desc: 'Which of the following is correct about how glasses work?',
+  image: '',
+  options: [
+    {
+      desc: 'When light get focused before the retina, convex lens would help.',
+      correct: false,
+      feedback: 'Try again! When light is focused before the retina, we need to use concave lens to expand the light to help with vision.'
+    },
+    {
+      desc: 'For myopic eyes, a pair of glasses with convex lens would help.',
+      correct: false,
+      feedback: 'Try again! For myopic eyes, light is focused before the retina, in this case, we need to use concave lens to expand the light to help with vision.'
+    },
+    {
+      desc: 'When light get focused behind the retina, convex lens would help.',
+      correct: true,
+      feedback: 'Good job! When light get focused behind the retina, convex lens will help narrow the light so that light could be focused on the retina.'
+    }
+  ]
+}, {
+  desc: 'Which of the following is correct regarding how glasses help with vision?',
+  image: '',
+  options: [
+    {
+      desc: 'Glasses refracts the light passing through it to help the light focused perfectly on the retina.',
+      correct: true,
+      feedback: 'Correct! By adjusting where the light get focused, the lens could improve blurry vision. When the light gets focused exactly on the retina, the eye will have perfect vision'
+    },
+    {
+      desc: 'Glasses makes the light brighter.',
+      correct: false,
+      feedback: 'Try again! Lenses do not affect the brightness of light. It helps with vision by changing the path of light.'
+    },
+    {
+      desc: 'Glasses always expand light so that the light gets closer to the retina.',
+      correct: false,
+      feedback: 'Not quite! Glasses with concave lens will do so and help with myopic eyes. However glasses with convex lens do the opposite and help with hyperopia by narrowing the light.'
+    }
+  ]
+}, {
+  desc: 'In the picture below, light passes through a lens in the box and changes its path. Do you know which type of lens it is?',
+  image: '',
+  options: [
+    {
+      desc: 'Concave',
+      correct: false,
+      feedback: 'Ooops! The light is narrowed, and not expanded. If the light is expanded, and the lens should be concave lens.'
+    },
+    {
+      desc: 'Convex',
+      correct: true,
+      feedback: 'You did it! Since the light is narrowed, we can infer that the lens in the box is a convex one. Good job!'
+    },
+    {
+      desc: 'Either Concave or Convex will have same effect',
+      correct: false,
+      feedback: 'Try again! Convex lens and concave lens change the path of light differently, only one type of lens would be correct.'
     }
   ]
 }];
