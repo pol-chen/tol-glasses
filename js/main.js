@@ -20,6 +20,10 @@ function onYouTubeIframeAPIReady() {
   });
 }
 
+function updateVideo(videoId) {
+  player.loadVideoById(videoId)
+}
+
 var videoTime = 0;
 var timeUpdater = null;
 var showingBoard = false;
@@ -101,8 +105,8 @@ function continueScene(el) {
     });
   });
 }
-function endScene(el) {
-  $(el).parent('.scene').fadeOut(function () {
+function endScene() {
+  $('.scene:visible').fadeOut(function () {
     hideBoard();
     playVideo();
   });
@@ -363,7 +367,7 @@ $(document).ready(function () {
     jumpScene(this);
   })
   $('.btn-end').click(function () {
-    endScene(this);
+    endScene();
   })
   $('.btn-share').click(function () {
     var url = "https://polarischen.github.io/tol-glasses/";
@@ -414,7 +418,6 @@ $(document).ready(function () {
   $('#btn-logout').click(function () {
     logout();
   })
-
   $('.btn-start').click(function () {
     console.log('START');
     if (isLoggedIn()) {
@@ -423,7 +426,6 @@ $(document).ready(function () {
       showScene('#scene-login');
     }
   })
-
   $('#btn-join').click(function () {
     console.log('JOIN');
     var tid = $(this).data('next');
@@ -438,6 +440,13 @@ $(document).ready(function () {
       console.log('JOIN NULL');
     }
   })
+  $('#btn-learn').click(function () {
+    console.log('LEARN');
+    var videoIds = ['0N9McnK2kh0', '0N9McnK2kh0'];
+    updateVideo(videoIds[part - 1]);
+    endScene();
+  })
+
 
   getTeams(function(teamDocs) {
     var $teamSelect = $('#scene-join .select');
