@@ -236,7 +236,43 @@
               </div>
             </div>
             <p>Let's take a quick quiz and see if you master how glasses work after learning from each other!</p>
-            <a id="btn-quiz" class="btn-continue" data-next="#scene-quizzed"><i class="fas fa-arrow-circle-right"></i>Continue</a>
+            <a id="btn-quiz" class="btn-continue" data-next="#scene-question-q"><i class="fas fa-arrow-circle-right"></i>Continue</a>
+          </div>
+
+          <div id="scene-question-q" class="scene scene-question">
+            <h2>Question 1</h2>
+            <p>Microwaves are electric waves that could NOT penetrate?</p>
+            <div class="gallery gallery-v select" data-target="#scene-question-q">
+              <div class="frame option" data-next="#scene-wrong-q">
+                <p>A. Food</p>
+              </div>
+              <div class="frame option" data-next="#scene-wrong-q">
+                <p>B. Ceramics</p>
+              </div>
+              <div class="frame option" data-next="#scene-wrong-q">
+                <p>C. Glass</p>
+              </div>
+              <div class="frame option" data-next="#scene-correct-q">
+                <p>D. Metal</p>
+              </div>
+            </div>
+            <a class="btn-continue btn-disabled" data-next="#scene-wrong-q"><i class="fas fa-arrow-circle-right"></i>Continue</a>
+          </div>
+          <div id="scene-correct-q" class="scene scene-feedback">
+            <div class="icon">
+              <i class="far fa-check-circle"></i>
+            </div>
+            <h2>Correct!</h2>
+            <p>Yes, microwaves heat all the water molecules in the food at the same time. So it heats all parts of the food at the same time.</p>
+            <a class="btn-continue-q" data-next="#scene-quizzed"><i class="fas fa-arrow-circle-right"></i>Continue</a>
+          </div>
+          <div id="scene-wrong-p" class="scene scene-feedback">
+            <div class="icon icon-alert">
+              <i class="far fa-times-circle"></i>
+            </div>
+            <h2>Incorrect</h2>
+            <p>There is a common misconception that microwave ovens heat food from the inside out. However, actually microwaves heat all the water molecules in the food at the same time. So it heats all parts of the food at the same time.<br>It is the conventional oven that heats food by heating the air and conduct the heat from the outside of the food to the inside, not the microwave oven.</p>
+            <a class="btn-continue-q" data-next="#scene-quizzed"><i class="fas fa-arrow-circle-right"></i>Continue</a>
           </div>
 
           <div id="scene-quizzed" class="scene">

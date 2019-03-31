@@ -95,8 +95,13 @@ function continueScene(el) {
   var next = $(el).data('next');
   console.log(next);
   $(el).parent('.scene').fadeOut(function () {
-    if (next.includes('scene-correct') || next.includes('scene-wrong')) {
+    if (next.includes('scene-correct-p') || next.includes('scene-wrong-p')) {
       loadPracticeFeedback();
+    } else if (next.includes('scene-correct-q') || next.includes('scene-wrong-q')) {
+      loadQuizFeedback();
+    }
+    if (next.includes('scene-correct-q')) {
+      countPoint();
     }
     $(next).fadeIn(function () {
       if (next.includes('scene-timer')) {
@@ -175,11 +180,20 @@ function buildOptionTeam(tid, name, icon) {
   </div>';
 }
 
-function buildOptionQuestion(op, i) {
+function buildOptionQuestionP(op, i) {
   var feedback = op.correct ? 'correct' : 'wrong';
   var nums = ['A', 'B', 'C', 'D'];
   var num = nums[i];
   return '<div class="frame option" data-next="#scene-' + feedback + '-p">\
+    <p>' + num + '. ' + op.desc + '</p>\
+  </div>';
+}
+
+function buildOptionQuestionQ(op, i) {
+  var feedback = op.correct ? 'correct' : 'wrong';
+  var nums = ['A', 'B', 'C', 'D'];
+  var num = nums[i];
+  return '<div class="frame option" data-next="#scene-' + feedback + '-q">\
     <p>' + num + '. ' + op.desc + '</p>\
   </div>';
 }
@@ -381,9 +395,11 @@ var questionDocs;
 var practices;
 var currentPractice = 0;
 var quizzes;
+var currentQuiz = 0;
 function getQuestions() {
   // Get questions from cloud
   loadPractice(); // Init first question
+  loadQuiz();
   console.log('Practice');
 }
 
@@ -449,7 +465,7 @@ function loadPractice() {
   $('#scene-question-p .select').empty();
   p.options.forEach(function(option, i) {
     console.log(option, i);
-    $('#scene-question-p .select').append(buildOptionQuestion(option, i));
+    $('#scene-question-p .select').append(buildOptionQuestionP(option, i));
   });
 }
 
@@ -457,6 +473,84 @@ function loadPracticeFeedback() {
   var p = practices[currentPractice-1];
   $('#scene-wrong-p p').text(p.feedbacks[0]);
   $('#scene-correct-p p').text(p.feedbacks[1]);
+}
+
+// Quiz
+
+function loadQuiz() {
+  quizzes = [{
+    desc: 'Apple11',
+    image: '',
+    options: [
+      {
+        desc: 'Food11',
+        correct: false
+      },
+      {
+        desc: 'Ceramics11',
+        correct: false
+      },
+      {
+        desc: 'Glass11',
+        correct: false
+      },
+      {
+        desc: 'Metal11',
+        correct: true
+      }
+    ],
+    feedbacks: [
+      'NO11',
+      'YES11'
+    ],
+    part: 2
+  },{
+    desc: 'Banana',
+    image: '',
+    options: [
+      {
+        desc: 'Food2',
+        correct: false
+      },
+      {
+        desc: 'Ceramics2',
+        correct: false
+      },
+      {
+        desc: 'Glass2',
+        correct: false
+      },
+      {
+        desc: 'Metal2',
+        correct: true
+      }
+    ],
+    feedbacks: [
+      'NO2',
+      'YES2'
+    ],
+    part: 1
+  }];
+
+  var p = quizzes[currentQuiz++];
+  $('#scene-question-q h2').text('Question ' + currentQuiz);
+  $('#scene-question-q p').text(p.desc);
+  $('#scene-question-q .select').empty();
+  p.options.forEach(function(option, i) {
+    console.log(option, i);
+    $('#scene-question-q .select').append(buildOptionQuestionQ(option, i));
+  });
+}
+
+function loadQuizFeedback() {
+  var p = quizzes[currentQuiz-1];
+  $('#scene-wrong-q p').text(p.feedbacks[0]);
+  $('#scene-correct-q p').text(p.feedbacks[1]);
+}
+
+var score = 0;
+function countPoint () {
+  score++;
 }
 
 $(document).ready(function () {
@@ -472,9 +566,21 @@ $(document).ready(function () {
   $('.btn-continue-p').click(function () {
     if (currentPractice == practices.length) {
       showScene('#scene-practiced');
+      // Update status
     } else {
       showScene('#scene-question-p');
       loadPractice();
+    }
+  })
+  $('.btn-continue-q').click(function () {
+    if (currentQuiz == quizzes.length) {
+      showScene('#scene-quizzed');
+      // Update status
+      // Upload score;
+      console.log('SCORE', score);
+    } else {
+      showScene('#scene-question-q');
+      loadQuiz();
     }
   })
   $('.btn-jump').click(function () {
