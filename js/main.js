@@ -173,10 +173,11 @@ function showSceneByStatus(status) {
 
 // Template
 
-function buildOptionTeam(tid, name, icon) {
+function buildOptionTeam(tid, name, icon, isNew) {
+  var count = isNew ? '' : ' [1/2]';
   return '<div class="frame option" data-next="' + tid + '">\
     <p><i class="fas fa-' + icon + '"></i></p>\
-    <p>Team ' + name + '</p>\
+    <p>Team ' + name + count + '</p>\
   </div>';
 }
 
@@ -331,14 +332,19 @@ function getTeams(success) {
 function updateTeams(teamDocs) {
   console.log('updateTeams', teamDocs);
   var $teamSelect = $('#scene-join .select');
+  var $teamSelectFound = $('#scene-found .select');
   $teamSelect.empty();
+  $teamSelectFound.empty();
   var count = 0;
   var max = 4;
   teamDocs.forEach(function(teamDoc) {
     var team = teamDoc.data();
     console.log(team);
-    if (count <= max && team.members.length == 1) {
-      $teamSelect.append(buildOptionTeam(teamDoc.id, team.name, team.icon));
+    if (team.members.length == 0) {
+      $teamSelectFound.append(buildOptionTeam(teamDoc.id, team.name, team.icon, true));
+    }
+    if (count <= max && team.members.length > 0) {
+      $teamSelect.append(buildOptionTeam(teamDoc.id, team.name, team.icon, false));
       count++;
     }
   });
@@ -747,6 +753,21 @@ $(document).ready(function () {
   })
   $('#btn-join').click(function () {
     console.log('JOIN');
+    var tid = $(this).data('next');
+    var uid = firebase.auth().currentUser.uid;
+    if (joinTeam(tid, uid)) {
+      console.log('JOIN', tid, uid);
+      updateStatus();
+      updateUserTeam(tid);
+      schedule(tid);
+      getTeam(tid, getPart);
+      getQuestions();
+    } else {
+      console.log('JOIN NULL');
+    }
+  })
+  $('#btn-found').click(function () {
+    console.log('FOUND');
     var tid = $(this).data('next');
     var uid = firebase.auth().currentUser.uid;
     if (joinTeam(tid, uid)) {
