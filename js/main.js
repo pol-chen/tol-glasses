@@ -95,22 +95,10 @@ function continueScene(el) {
   var next = $(el).data('next');
   console.log(next);
   $(el).parent('.scene').fadeOut(function () {
-    if (next.includes('scene-correct-p') || next.includes('scene-wrong-p')) {
-      loadPracticeFeedback();
-    } else if (next.includes('scene-correct-q') || next.includes('scene-wrong-q')) {
-      loadQuizFeedback();
-    }
     if (next.includes('scene-correct-q')) {
       countPoint();
     }
-    $(next).fadeIn(function () {
-      if (next.includes('scene-timer')) {
-        // document.getElementById('sound').play();
-        // setTimeout(continueScene, 4000, $(next).find('.btn-continue'));
-      } else if (next.includes('scene-end')) {
-        // document.getElementById('ending').play();
-      }
-    });
+    $(next).fadeIn();
   });
 }
 function endScene() {
@@ -126,14 +114,20 @@ function jumpScene(el) {
     $(to).fadeIn();
   });
 }
-function showScene(target) {
+function showScene(target, prep) {
   var $scene = $('.scene:visible');
   if ($scene.length == 0) {
     console.log('SHOW', target);
+    if (prep) {
+      prep();
+    }
     $(target).show();
   } else {
     $('.scene:visible').fadeOut(function () {
       console.log('FADE IN', target);
+      if (prep) {
+        prep();
+      }
       $(target).fadeIn();
     });
   }
@@ -406,6 +400,7 @@ function getPart(teamDoc) {
   console.log('PART', part);
 
   updateChecklist(part);
+  getQuestions();
 }
 
 function updateTeamIcon(icon) {
@@ -486,75 +481,146 @@ function learn() {
 }
 
 // Practice
-var questionDocs;
-var practices;
+var practices = [
+  [{
+    desc: 'When light from a object reaches our eyes, which part(s) of the eye refracts the light?',
+    image: '',
+    options: [
+      {
+        desc: 'Cornea and Lens',
+        correct: true,
+        feedback: 'Correct! When light from a object reaches our eyes, the cornea and lens refracts the light.'
+      },
+      {
+        desc: 'Retina',
+        correct: false,
+        feedback: 'Try again! Retina does not refract light, it is where light get focused in a person who has perfect vision'
+      },
+      {
+        desc: 'Glass',
+        correct: false,
+        feedback: 'Try again! Light enters the eye through the pupil, but pupil does not refracts light'
+      }
+    ]
+  }, {
+    desc: 'In order to have perfect vision, where does light need to be focused in the eye?',
+    image: '',
+    options: [
+      {
+        desc: 'In between lens and retina',
+        correct: false,
+        feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision'
+      },
+      {
+        desc: 'Cornea and Lens',
+        correct: false,
+        feedback: 'Try again! Cornea and lens are where light gets refracted, not where light gets focused in order to have perfect vision'
+      },
+      {
+        desc: 'Retina',
+        correct: true,
+        feedback: 'Good job! In a person who has perfect vision, the refracted light is actually focused on the retina'
+      }
+    ]
+  }, {
+    desc: 'When light get focused before the retina, what will it cause?',
+    image: '',
+    options: [
+      {
+        desc: 'Hyperopia and hypermetropia',
+        correct: false,
+        feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision'
+      },
+      {
+        desc: 'Myopia',
+        correct: true,
+        feedback: 'Good job! Myopia is also called nearsightedness, which causes blurry vision when looking at distant objects'
+      },
+      {
+        desc: 'Farsightedness',
+        correct: false,
+        feedback: 'Try again! Try again! Farsightedness is also called hyperopia or hypermetropia, which is the defect when light gets focused behind the retina'
+      }
+    ]
+  }],
+  [{
+    desc: 'When light from a object reaches our eyes, which part(s) of the eye refracts the light?',
+    image: '',
+    options: [
+      {
+        desc: 'Cornea and Lens',
+        correct: true,
+        feedback: 'Correct! When light from a object reaches our eyes, the cornea and lens refracts the light.'
+      },
+      {
+        desc: 'Retina',
+        correct: false,
+        feedback: 'Try again! Retina does not refract light, it is where light get focused in a person who has perfect vision'
+      },
+      {
+        desc: 'Glass',
+        correct: false,
+        feedback: 'Try again! Light enters the eye through the pupil, but pupil does not refracts light'
+      }
+    ]
+  }, {
+    desc: 'In order to have perfect vision, where does light need to be focused in the eye?',
+    image: '',
+    options: [
+      {
+        desc: 'In between lens and retina',
+        correct: false,
+        feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision'
+      },
+      {
+        desc: 'Cornea and Lens',
+        correct: false,
+        feedback: 'Try again! Cornea and lens are where light gets refracted, not where light gets focused in order to have perfect vision'
+      },
+      {
+        desc: 'Retina',
+        correct: true,
+        feedback: 'Good job! In a person who has perfect vision, the refracted light is actually focused on the retina'
+      }
+    ]
+  }, {
+    desc: 'When light get focused before the retina, what will it cause?',
+    image: '',
+    options: [
+      {
+        desc: 'Hyperopia and hypermetropia',
+        correct: false,
+        feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision'
+      },
+      {
+        desc: 'Myopia',
+        correct: true,
+        feedback: 'Good job! Myopia is also called nearsightedness, which causes blurry vision when looking at distant objects'
+      },
+      {
+        desc: 'Farsightedness',
+        correct: false,
+        feedback: 'Try again! Try again! Farsightedness is also called hyperopia or hypermetropia, which is the defect when light gets focused behind the retina'
+      }
+    ]
+  }]
+];
+var practicesMine;
 var currentPractice = 0;
-var quizzes;
-var currentQuiz = 0;
+
 function getQuestions() {
   // Get questions from cloud
+  console.log('Practice');
   loadPractice(); // Init first question
   loadQuiz();
-  console.log('Practice');
 }
 
 function loadPractice() {
   console.log('Load');
-  practices = [{
-    desc: 'Apple',
-    image: '',
-    options: [
-      {
-        desc: 'Food',
-        correct: false
-      },
-      {
-        desc: 'Ceramics',
-        correct: false
-      },
-      {
-        desc: 'Glass',
-        correct: false
-      },
-      {
-        desc: 'Metal',
-        correct: true
-      }
-    ],
-    feedbacks: [
-      'NO',
-      'YES'
-    ],
-    part: 2
-  },{
-    desc: 'Banana',
-    image: '',
-    options: [
-      {
-        desc: 'Food2',
-        correct: false
-      },
-      {
-        desc: 'Ceramics2',
-        correct: false
-      },
-      {
-        desc: 'Glass2',
-        correct: false
-      },
-      {
-        desc: 'Metal2',
-        correct: true
-      }
-    ],
-    feedbacks: [
-      'NO2',
-      'YES2'
-    ],
-    part: 1
-  }];
+  var mine = part - 1;
+  practicesMine = practices[mine];
 
-  var p = practices[currentPractice++];
+  var p = practicesMine[currentPractice++];
   $('#scene-question-p h2').text('Question ' + currentPractice);
   $('#scene-question-p p').text(p.desc);
   $('#scene-question-p .btn-continue').addClass('btn-disabled');
@@ -562,72 +628,80 @@ function loadPractice() {
   p.options.forEach(function(option, i) {
     console.log(option, i);
     $('#scene-question-p .select').append(buildOptionQuestionP(option, i));
+    if (option.correct) {
+      $('#scene-correct-p p').text(option.feedback);
+    } else {
+      $('#scene-wrong-p p').text(option.feedback);
+    }
   });
-}
-
-function loadPracticeFeedback() {
-  var p = practices[currentPractice-1];
-  $('#scene-wrong-p p').text(p.feedbacks[0]);
-  $('#scene-correct-p p').text(p.feedbacks[1]);
 }
 
 // Quiz
 
-function loadQuiz() {
-  quizzes = [{
-    desc: 'Apple11',
-    image: '',
-    options: [
-      {
-        desc: 'Food11',
-        correct: false
-      },
-      {
-        desc: 'Ceramics11',
-        correct: false
-      },
-      {
-        desc: 'Glass11',
-        correct: false
-      },
-      {
-        desc: 'Metal11',
-        correct: true
-      }
-    ],
-    feedbacks: [
-      'NO11',
-      'YES11'
-    ],
-    part: 2
-  },{
-    desc: 'Banana',
-    image: '',
-    options: [
-      {
-        desc: 'Food2',
-        correct: false
-      },
-      {
-        desc: 'Ceramics2',
-        correct: false
-      },
-      {
-        desc: 'Glass2',
-        correct: false
-      },
-      {
-        desc: 'Metal2',
-        correct: true
-      }
-    ],
-    feedbacks: [
-      'NO2',
-      'YES2'
-    ],
-    part: 1
-  }];
+var quizzes = [{
+  desc: 'When light from a object reaches our eyes, which part(s) of the eye refracts the light?',
+  image: '',
+  options: [
+    {
+      desc: 'Cornea and Lens',
+      correct: true,
+      feedback: 'Correct! When light from a object reaches our eyes, the cornea and lens refracts the light.'
+    },
+    {
+      desc: 'Retina',
+      correct: false,
+      feedback: 'Try again! Retina does not refract light, it is where light get focused in a person who has perfect vision'
+    },
+    {
+      desc: 'Glass',
+      correct: false,
+      feedback: 'Try again! Light enters the eye through the pupil, but pupil does not refracts light'
+    }
+  ]
+}, {
+  desc: 'In order to have perfect vision, where does light need to be focused in the eye?',
+  image: '',
+  options: [
+    {
+      desc: 'In between lens and retina',
+      correct: false,
+      feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision'
+    },
+    {
+      desc: 'Cornea and Lens',
+      correct: false,
+      feedback: 'Try again! Cornea and lens are where light gets refracted, not where light gets focused in order to have perfect vision'
+    },
+    {
+      desc: 'Retina',
+      correct: true,
+      feedback: 'Good job! In a person who has perfect vision, the refracted light is actually focused on the retina'
+    }
+  ]
+}, {
+  desc: 'When light get focused before the retina, what will it cause?',
+  image: '',
+  options: [
+    {
+      desc: 'Hyperopia and hypermetropia',
+      correct: false,
+      feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision'
+    },
+    {
+      desc: 'Myopia',
+      correct: true,
+      feedback: 'Good job! Myopia is also called nearsightedness, which causes blurry vision when looking at distant objects'
+    },
+    {
+      desc: 'Farsightedness',
+      correct: false,
+      feedback: 'Try again! Try again! Farsightedness is also called hyperopia or hypermetropia, which is the defect when light gets focused behind the retina'
+    }
+  ]
+}];
+var currentQuiz = 0;
 
+function loadQuiz() {
   var p = quizzes[currentQuiz++];
   $('#scene-question-q h2').text('Question ' + currentQuiz);
   $('#scene-question-q p').text(p.desc);
@@ -636,13 +710,12 @@ function loadQuiz() {
   p.options.forEach(function(option, i) {
     console.log(option, i);
     $('#scene-question-q .select').append(buildOptionQuestionQ(option, i));
+    if (option.correct) {
+      $('#scene-correct-q p').text(option.feedback);
+    } else {
+      $('#scene-wrong-q p').text(option.feedback);
+    }
   });
-}
-
-function loadQuizFeedback() {
-  var p = quizzes[currentQuiz-1];
-  $('#scene-wrong-q p').text(p.feedbacks[0]);
-  $('#scene-correct-q p').text(p.feedbacks[1]);
 }
 
 // Score
@@ -714,8 +787,7 @@ $(document).ready(function () {
       showScene('#scene-practiced');
       updateStatus();
     } else {
-      showScene('#scene-question-p');
-      loadPractice();
+      showScene('#scene-question-p', loadPractice);
     }
   })
   $('.btn-continue-q').click(function () {
@@ -725,8 +797,7 @@ $(document).ready(function () {
       updateScore(score);
       console.log('SCORE', score);
     } else {
-      showScene('#scene-question-q');
-      loadQuiz();
+      showScene('#scene-question-q', loadQuiz);
     }
   })
   $('.btn-jump').click(function () {
@@ -824,7 +895,6 @@ $(document).ready(function () {
         updateUserTeam(tid);
         schedule(tid);
         getTeam(tid, getPart);
-        getQuestions();
       } else {
         console.log('JOIN NULL');
       }
@@ -841,7 +911,6 @@ $(document).ready(function () {
         updateUserTeam(tid);
         schedule(tid);
         getTeam(tid, getPart);
-        getQuestions();
       } else {
         console.log('JOIN NULL');
       }
@@ -890,7 +959,6 @@ $(document).ready(function () {
         showSceneByStatus(user.status);
         if (user.status > 0) {
           getTeam(user.tid, getPart);
-          getQuestions();
         }
       }, function() {
         console.log('INIT USER');
