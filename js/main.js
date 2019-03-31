@@ -777,33 +777,37 @@ $(document).ready(function () {
     }
   })
   $('#btn-join').click(function () {
-    console.log('JOIN');
-    var tid = $(this).data('next');
-    var uid = firebase.auth().currentUser.uid;
-    if (joinTeam(tid, uid)) {
-      console.log('JOIN', tid, uid);
-      updateStatus();
-      updateUserTeam(tid);
-      schedule(tid);
-      getTeam(tid, getPart);
-      getQuestions();
-    } else {
-      console.log('JOIN NULL');
+    if (!$(this).hasClass('btn-disabled')) {
+      console.log('JOIN');
+      var tid = $(this).data('next');
+      var uid = firebase.auth().currentUser.uid;
+      if (joinTeam(tid, uid)) {
+        console.log('JOIN', tid, uid);
+        updateStatus();
+        updateUserTeam(tid);
+        schedule(tid);
+        getTeam(tid, getPart);
+        getQuestions();
+      } else {
+        console.log('JOIN NULL');
+      }
     }
   })
   $('#btn-found').click(function () {
-    console.log('FOUND');
-    var tid = $(this).data('next');
-    var uid = firebase.auth().currentUser.uid;
-    if (joinTeam(tid, uid)) {
-      console.log('JOIN', tid, uid);
-      updateStatus();
-      updateUserTeam(tid);
-      schedule(tid);
-      getTeam(tid, getPart);
-      getQuestions();
-    } else {
-      console.log('JOIN NULL');
+    if (!$(this).hasClass('btn-disabled')) {
+      console.log('FOUND');
+      var tid = $(this).data('next');
+      var uid = firebase.auth().currentUser.uid;
+      if (joinTeam(tid, uid)) {
+        console.log('JOIN', tid, uid);
+        updateStatus();
+        updateUserTeam(tid);
+        schedule(tid);
+        getTeam(tid, getPart);
+        getQuestions();
+      } else {
+        console.log('JOIN NULL');
+      }
     }
   })
   $('#btn-learn').click(function () {
@@ -817,10 +821,14 @@ $(document).ready(function () {
     updateStatus();
   })
   $('#btn-discussed').click(function () {
-    updateStatus();
+    if (!$(this).hasClass('btn-disabled')) {
+      updateStatus();
+    }
   })
   $('#btn-taught').click(function () {
-    updateStatus();
+    if (!$(this).hasClass('btn-disabled')) {
+      updateStatus();
+    }
   })
   $('#btn-score').click(function () {
     calculateScore();
