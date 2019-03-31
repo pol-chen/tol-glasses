@@ -45,11 +45,11 @@ function onPlayerReady(event) {
 
 // when the time changes, this will be called.
 function onProgress(currentTime) {
-  console.log(currentTime);
-  if(currentTime >= 129 && currentTime < 130 && !showingBoard && !justShowedBoard) {
-    console.log("Trigger");
-    triggerScenePizza();
-  }
+  // console.log(currentTime);
+  // if(currentTime >= 129 && currentTime < 130 && !showingBoard && !justShowedBoard) {
+  //   console.log("Trigger");
+  //   triggerScenePizza();
+  // }
 }
 
 // 5. The API calls this function when the player's state changes.
