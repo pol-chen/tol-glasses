@@ -208,15 +208,15 @@ function getUser(uid, success, fail) {
   var usersRef = db.collection('users').where('uid', '==', uid);
   usersRef.get().then(function(res) {
     if (!res.empty) {
-      console.log('Document data:', res.docs);
+      console.log('USER', res.docs);
       userDoc = res.docs[0];
       success(userDoc.data());
     } else {
-      console.log('No such document!');
+      console.log('No such user!');
       fail();
     }
   }).catch(function(error) {
-    console.log('Error getting document:', error);
+    console.log('Error getting user:', error);
   });
 }
 
@@ -228,9 +228,9 @@ function initUser(auth) {
     email: auth.email,
     status: 0
   }).then(function(docRef) {
-    console.log('Document written with ID:', docRef.id);
+    console.log('User written with ID:', docRef.id);
   }).catch(function(error) {
-    console.error('Error adding document:', error);
+    console.error('Error adding user:', error);
   });
 }
 
@@ -241,10 +241,22 @@ function updateStatus() {
   return userRef.update({
     status: status
   }).then(function() {
-    console.log('Document successfully updated!');
+    console.log('User successfully updated!');
     showSceneByStatus(status)
   }).catch(function(error) {
-    console.error('Error updating document:', error);
+    console.error('Error updating user:', error);
+  });
+}
+
+function updateUserTeam(tid) {
+  var db = firebase.firestore();
+  var userRef = db.collection('users').doc(userDoc.id);
+  return userRef.update({
+    tid: tid
+  }).then(function() {
+    console.log('User successfully updated!');
+  }).catch(function(error) {
+    console.error('Error updating user:', error);
   });
 }
 
@@ -255,17 +267,17 @@ function getTeams(success) {
   var teamsRef = db.collection('teams');
   teamsRef.get().then(function(res) {
     if (!res.empty) {
-      console.log('Document data:', res.docs);
+      console.log('TEAMS', res.docs);
       // teams = doc.docs.map(function(doc) {
       //   return doc.data();
       // });
       teamDocs = res.docs;
       success(teamDocs);
     } else {
-      console.log('No such document!');
+      console.log('No such teams!');
     }
   }).catch(function(error) {
-    console.log('Error getting document:', error);
+    console.log('Error getting teams:', error);
   });
 }
 
@@ -275,9 +287,9 @@ function joinTeam(tid, uid) {
   return teamRef.update({
     members: firebase.firestore.FieldValue.arrayUnion(uid)
   }).then(function() {
-    console.log('Document successfully updated!');
+    console.log('Team successfully updated!');
   }).catch(function(error) {
-    console.error('Error updating document:', error);
+    console.error('Error updating team:', error);
   });
 }
 
@@ -288,8 +300,34 @@ function addZero(n) {
   return n < 10 ? '0' + n : '' + n;
 }
 
-var teamSchedule;
+var teamDoc;
+function getTeam(tid, success) {
+  var db = firebase.firestore();
+  var teamRef = db.collection('teams').doc(tid);
+  teamRef.get().then(function(doc) {
+    if (doc.exists) {
+      console.log('TEAM', doc.data());
+      teamDoc = doc;
+      success(teamDoc);
+    } else {
+      console.log('No such team!');
+    }
+  }).catch(function(error) {
+    console.log('Error getting team:', error);
+  });
+}
+
+var part;
+function getPart(teamDoc) {
+  var team = teamDoc.data();
+  var uid = firebase.auth().currentUser.uid;
+  var index = team.members.indexOf(uid);
+  part = team.assign[index];
+  console.log('PART', part);
+}
+
 function schedule(tid) {
+  // Schedule
   var rand = getRandomInt(1, 2);
   var left = rand == 1 ? 2 : 1;
   var now = new Date();
@@ -301,13 +339,13 @@ function schedule(tid) {
     discussAt: discussAt,
     teachAt: teachAt
   };
-  teamSchedule = data;
+  // Update cloud team
   var db = firebase.firestore();
   var teamRef = db.collection('teams').doc(tid);
   return teamRef.update(data).then(function() {
-    console.log('Document successfully updated!');
+    console.log('Team successfully updated!');
   }).catch(function(error) {
-    console.error('Error updating document:', error);
+    console.error('Error updating team:', error);
   });
 }
 
@@ -393,7 +431,9 @@ $(document).ready(function () {
     if (joinTeam(tid, uid)) {
       console.log('JOIN', tid, uid);
       updateStatus();
+      updateUserTeam(tid);
       schedule(tid);
+      getTeam(tid, getPart);
     } else {
       console.log('JOIN NULL');
     }
@@ -426,7 +466,7 @@ $(document).ready(function () {
         console.log('CHECK STATUS', user);
         showSceneByStatus(user.status);
         if (user.status > 0) {
-          // getTeam();
+          getTeam(user.tid, getPart);
           // getPractice();
         }
       }, function() {
