@@ -343,6 +343,7 @@ function getTeam(tid, success) {
     if (doc.exists) {
       console.log('TEAM', doc.data());
       teamDoc = doc;
+      updateTeamIcon(doc.data().icon);
       success(teamDoc);
     } else {
       console.log('No such team!');
@@ -359,6 +360,11 @@ function getPart(teamDoc) {
   var index = team.members.indexOf(uid);
   part = team.assign[index];
   console.log('PART', part);
+}
+
+function updateTeamIcon(icon) {
+  var i = '<i class="fas fa-' + icon + '"></i>';
+  $('.icon-team').html(i);
 }
 
 function schedule(tid) {
