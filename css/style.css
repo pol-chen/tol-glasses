@@ -62,13 +62,15 @@ html {
 }
 
 header {
-  margin-top: 72px;
+  margin-top: 64px;
+  margin-bottom: 36px;
 }
 
 h1 {
   font-family: 'Dosis', sans-serif;
-  font-size: 36px;
+  font-size: 44px;
   color: #565957;
+  text-align: center;
 }
 
 h1 span {
@@ -345,4 +347,5 @@ footer {
   margin: 24px 0;
   font-size: 12px;
   color: #888888;
+  text-align: center;
 }
