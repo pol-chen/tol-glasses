@@ -369,9 +369,16 @@ $(document).ready(function () {
   })
 
   getTeams(function(teamDocs) {
+    var $teamSelect = $('#scene-join .select');
+    $teamSelect.empty();
+    var count = 0;
+    var max = 4;
     teamDocs.forEach(function(teamDoc) {
       var team = teamDoc.data();
-      $('#scene-join .select').append(buildOptionTeam(teamDoc.id, team.name, team.icon));
+      if (count <= max && team.members.length == 1) {
+        $teamSelect.append(buildOptionTeam(teamDoc.id, team.name, team.icon));
+        count++;
+      }
     });
   });
 
@@ -395,6 +402,7 @@ $(document).ready(function () {
       // No user is logged in
       console.log('AUTH NULL');
       showScene('#scene-start');
+      // showScene('#scene-join');
     }
   });
 })

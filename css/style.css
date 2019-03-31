@@ -232,6 +232,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
   border: 3px solid #FAF6EE;
   background: #FAF6EE;
   cursor: pointer;
