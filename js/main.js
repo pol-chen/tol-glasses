@@ -301,7 +301,8 @@ function updateUserTeam(tid) {
   var db = firebase.firestore();
   var userRef = db.collection('users').doc(userDoc.id);
   return userRef.update({
-    tid: tid
+    tid: tid,
+    score: 0
   }).then(function() {
     console.log('User successfully updated!');
   }).catch(function(error) {
@@ -355,7 +356,9 @@ function joinTeam(tid, uid) {
   var db = firebase.firestore();
   var teamRef = db.collection('teams').doc(tid);
   return teamRef.update({
-    members: firebase.firestore.FieldValue.arrayUnion(uid)
+    members: firebase.firestore.FieldValue.arrayUnion(uid),
+    ranking: 0,
+    score: 0
   }).then(function() {
     console.log('Team successfully updated!');
   }).catch(function(error) {
