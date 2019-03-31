@@ -734,8 +734,8 @@ $(document).ready(function () {
       $(this).find('i').addClass('fa-circle');
     }
 
-    var optionsSelected = $select.find('.option-selected');
-    var options = $select.find('.option');
+    var optionsSelected = $select.parent('.scene').find('.option-selected');
+    var options = $select.parent('.scene').find('.option');
     var $btn = $select.parent('.scene').children('a');
     if (optionsSelected.length == options.length) {
       $btn.removeClass('btn-disabled');

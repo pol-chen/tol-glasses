@@ -187,6 +187,10 @@ main {
   text-align: center;
 }
 
+.scene p.shrink {
+  margin: 0 auto;
+}
+
 .scene p b {
   color: #4CBBD8;
   font-weight: 400;
@@ -293,7 +297,6 @@ main {
 }
 
 .scene .select-checklist .option p {
-  padding: 6px;
   color: #565957;
   text-align: left;
 }
