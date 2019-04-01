@@ -270,9 +270,8 @@ function initUser(auth) {
 function updateStatus() {
   var db = firebase.firestore();
   var userRef = db.collection('users').doc(userDoc.id);
-  var status = userDoc.data().status + 1;
   return userRef.update({
-    status: status
+    status: firebase.firestore.FieldValue.increment(1)
   }).then(function() {
     console.log('User successfully updated!');
     showSceneByStatus(status)
