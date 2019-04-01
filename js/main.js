@@ -340,7 +340,7 @@ function updateTeams(teamDocs) {
     if (team.members.length == 0) {
       $teamSelectFound.append(buildOptionTeam(teamDoc.id, team.name, team.icon, true));
     }
-    if (count <= max && team.members.length > 0) {
+    if (count <= max && team.members.length == 1) {
       $teamSelect.append(buildOptionTeam(teamDoc.id, team.name, team.icon, false));
       count++;
     }
