@@ -382,6 +382,7 @@ function getTeam(tid, success) {
       console.log('TEAM', doc.data());
       teamDoc = doc;
       updateTeamInfo();
+      getOtherScore();
       success(teamDoc);
     } else {
       console.log('No such team!');
@@ -1174,9 +1175,6 @@ $(document).ready(function () {
           // Update score
           score = user.score;
           $('.score-mine').text(user.score);
-        }
-        if (user.status == 7) {
-          getOtherScore();
         }
       }, function() {
         console.log('INIT USER');
