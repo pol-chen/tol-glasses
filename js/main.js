@@ -262,6 +262,7 @@ function initUser(auth) {
     status: 0
   }).then(function(docRef) {
     console.log('User written with ID:', docRef.id);
+    userDoc = docRef;
   }).catch(function(error) {
     console.error('Error adding user:', error);
   });
