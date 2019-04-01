@@ -482,18 +482,18 @@ function learn() {
 // Practice
 var practices = [
   [{
-    desc: 'When light from a object reaches our eyes, which part(s) of the eye refracts the light?',
+    desc: 'When light from an object reaches our eyes, which part(s) of the eye refracts the light?',
     image: '',
     options: [
       {
         desc: 'Cornea and Lens',
         correct: true,
-        feedback: 'Correct! When light from a object reaches our eyes, the cornea and lens refracts the light.'
+        feedback: 'Correct! When light from an object reaches our eyes, the cornea and lens refracts the light.'
       },
       {
         desc: 'Retina',
         correct: false,
-        feedback: 'Try again! Retina does not refract light, it is where light get focused in a person who has perfect vision.'
+        feedback: 'Try again! Retina does not refract light, it is where light gets focused in a person who has perfect vision.'
       },
       {
         desc: 'Glass',
@@ -508,7 +508,7 @@ var practices = [
       {
         desc: 'In between lens and retina',
         correct: false,
-        feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision.'
+        feedback: 'Try again! When light gets focused before the retina, the person will have a blurry vision.'
       },
       {
         desc: 'Cornea and Lens',
@@ -522,13 +522,13 @@ var practices = [
       }
     ]
   }, {
-    desc: 'When light get focused before the retina, what will it cause?',
+    desc: 'When light gets focused before the retina, what will it cause?',
     image: '',
     options: [
       {
         desc: 'Hyperopia and hypermetropia',
         correct: false,
-        feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision.'
+        feedback: 'Try again! When light gets focused before the retina, the person will have a blurry vision.'
       },
       {
         desc: 'Myopia',
@@ -549,7 +549,7 @@ var practices = [
       {
         desc: 'Glasses refracts the light passing through it to help the light focused perfectly on the retina.',
         correct: true,
-        feedback: 'Correct! By adjusting where the light get focused, the lens could improve blurry vision. When the light gets focused exactly on the retina, the eye will have perfect vision.'
+        feedback: 'Correct! By adjusting where the light gets focused, the lens could improve blurry vision. When the light gets focused exactly on the retina, the eye will have perfect vision.'
       },
       {
         desc: 'Glasses makes the light brighter.',
@@ -662,18 +662,18 @@ var quizzes = [{
     }
   ]
 }, {
-  desc: 'When light from a object reaches our eyes, which part(s) of the eye refracts the light?',
+  desc: 'When light from an object reaches our eyes, which part(s) of the eye refracts the light?',
   image: '',
   options: [
     {
       desc: 'Cornea and Lens',
       correct: true,
-      feedback: 'Correct! When light from a object reaches our eyes, the cornea and lens refracts the light.'
+      feedback: 'Correct! When light from an object reaches our eyes, the cornea and lens refracts the light.'
     },
     {
       desc: 'Retina',
       correct: false,
-      feedback: 'Try again! Retina does not refract light, it is where light get focused in a person who has perfect vision.'
+      feedback: 'Try again! Retina does not refract light, it is where light gets focused in a person who has perfect vision.'
     },
     {
       desc: 'Pupil',
@@ -688,7 +688,7 @@ var quizzes = [{
     {
       desc: 'In between lens and retina.',
       correct: false,
-      feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision.'
+      feedback: 'Try again! When light gets focused before the retina, the person will have a blurry vision.'
     },
     {
       desc: 'Cornea and Lens',
@@ -702,7 +702,7 @@ var quizzes = [{
     }
   ]
 }, {
-  desc: 'When light get focused before the retina, what will it cause?',
+  desc: 'When light gets focused before the retina, what will it cause?',
   image: '',
   options: [
     {
@@ -786,7 +786,7 @@ var quizzes = [{
   image: '',
   options: [
     {
-      desc: 'When light get focused before the retina, convex lens would help.',
+      desc: 'When light gets focused before the retina, convex lens would help.',
       correct: false,
       feedback: 'Try again! When light is focused before the retina, we need to use concave lens to expand the light to help with vision.'
     },
@@ -796,9 +796,9 @@ var quizzes = [{
       feedback: 'Try again! For myopic eyes, light is focused before the retina, in this case, we need to use concave lens to expand the light to help with vision.'
     },
     {
-      desc: 'When light get focused behind the retina, convex lens would help.',
+      desc: 'When light gets focused behind the retina, convex lens would help.',
       correct: true,
-      feedback: 'Good job! When light get focused behind the retina, convex lens will help narrow the light so that light could be focused on the retina.'
+      feedback: 'Good job! When light gets focused behind the retina, convex lens will help narrow the light so that light could be focused on the retina.'
     }
   ]
 }, {
@@ -808,7 +808,7 @@ var quizzes = [{
     {
       desc: 'Glasses refracts the light passing through it to help the light focused perfectly on the retina.',
       correct: true,
-      feedback: 'Correct! By adjusting where the light get focused, the lens could improve blurry vision. When the light gets focused exactly on the retina, the eye will have perfect vision'
+      feedback: 'Correct! By adjusting where the light gets focused, the lens could improve blurry vision. When the light gets focused exactly on the retina, the eye will have perfect vision'
     },
     {
       desc: 'Glasses makes the light brighter.',
