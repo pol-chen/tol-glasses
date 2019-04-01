@@ -908,7 +908,7 @@ function calculateScore(otherScore) {
     otherScore = getRandomInt(7, total);
   }
   console.log('SCORE TEAMMATE', otherScore);
-  var avg = (score + teammate).toFixed(1) / 2.0;
+  var avg = (score + otherScore).toFixed(1) / 2.0;
   $('#score').text(avg);
 
   updateTeamScore(avg);
