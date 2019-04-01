@@ -341,11 +341,11 @@ function updateTeams(teamDocs) {
   teamDocs.forEach(function(teamDoc) {
     var team = teamDoc.data();
     // console.log(team);
-    if (countFound <= maxFound && team.members.length == 0) {
+    if (countFound < maxFound && team.members.length == 0) {
       $teamSelectFound.append(buildOptionTeam(teamDoc.id, team.name, team.icon, true));
       countFound++;
     }
-    if (count <= max && team.members.length == 1) {
+    if (count < max && team.members.length == 1) {
       $teamSelect.append(buildOptionTeam(teamDoc.id, team.name, team.icon, false));
       count++;
     }
