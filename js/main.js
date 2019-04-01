@@ -1053,7 +1053,7 @@ $(document).ready(function () {
         console.log('JOIN', tid, uid);
         updateStatus();
         updateUserTeam(tid);
-        schedule(tid);
+        // schedule(tid);
         getTeam(tid, getPart);
         showScene('#scene-joined');
       } else {
@@ -1067,14 +1067,14 @@ $(document).ready(function () {
       var tid = $(this).data('next');
       var uid = firebase.auth().currentUser.uid;
       if (joinTeam(tid, uid)) {
-        console.log('JOIN', tid, uid);
+        console.log('FOUND', tid, uid);
         updateStatus();
         updateUserTeam(tid);
         schedule(tid);
         getTeam(tid, getPart);
         showScene('#scene-joined');
       } else {
-        console.log('JOIN NULL');
+        console.log('FOUND NULL');
       }
     }
   })
