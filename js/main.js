@@ -274,7 +274,7 @@ function updateStatus() {
     status: firebase.firestore.FieldValue.increment(1)
   }).then(function() {
     console.log('User successfully updated!');
-    showSceneByStatus(status)
+    // showSceneByStatus(status);
   }).catch(function(error) {
     console.error('Error updating user:', error);
   });
