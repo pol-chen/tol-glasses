@@ -926,7 +926,7 @@ $(document).ready(function () {
     }
   })
   $('.btn-continue-p').click(function () {
-    if (currentPractice == practices.length) {
+    if (currentPractice == practices[0].length) {
       showScene('#scene-practiced');
       updateStatus();
     } else {
