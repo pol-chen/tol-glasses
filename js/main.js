@@ -474,8 +474,6 @@ function assign(tid) {
   });
 }
 
-//// here
-
 function schedule(tid) {
   var dt = new Date();
   if (dt.getHours() >= 18) {
