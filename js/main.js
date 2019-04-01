@@ -898,9 +898,12 @@ function countPoint() {
   score++;
 }
 
-function calculateScore() {
-  var teammate = getRandomInt(7, total);
-  console.log('SCORE TEAMMATE', teammate);
+function calculateScore(otherScore) {
+  if (!otherScore) {
+    console.log('RANDOM');
+    otherScore = getRandomInt(7, total);
+  }
+  console.log('SCORE TEAMMATE', otherScore);
   var avg = (score + teammate).toFixed(1) / 2.0;
   $('#score').text(avg);
 
@@ -913,6 +916,26 @@ function calculateRanking() {
   $('#ranking').text(ranking);
 
   updateTeamRanking(ranking);
+}
+
+// Get other score and update teams
+function getOtherScore() {
+  var otherIndex = part == 1 ? 1 : 0;
+  var otherUid = teamDocs.data().members[otherIndex];
+
+  var db = firebase.firestore();
+  var usersRef = db.collection('users').where('uid', '==', otherUid);
+  usersRef.get().then(function(res) {
+    if (!res.empty) {
+      console.log('USER TEAMMATE', res.docs);
+      var otherUser = res.docs[0].data();
+      calculateScore(otherUser.score);
+    } else {
+      console.log('No such user!');
+    }
+  }).catch(function(error) {
+    console.log('Error getting user:', error);
+  });
 }
 
 // Checklist
@@ -1148,6 +1171,9 @@ $(document).ready(function () {
           // Update score
           score = user.score;
           $('.score-mine').text(user.score);
+        }
+        if (user.status == 7) {
+          getOtherScore();
         }
       }, function() {
         console.log('INIT USER');
