@@ -899,7 +899,7 @@ function countPoint() {
 }
 
 function calculateScore(otherScore) {
-  if (!otherScore) {
+  if (otherScore == -1) {
     console.log('RANDOM');
     otherScore = getRandomInt(7, total);
   }
@@ -1146,7 +1146,7 @@ $(document).ready(function () {
     }
   })
   $('#btn-score').click(function () {
-    calculateScore();
+    calculateScore(-1);
   })
   $('#btn-ranking').click(function () {
     calculateRanking();
