@@ -288,6 +288,7 @@ function updateScore(score) {
     score: score
   }).then(function() {
     console.log('User score successfully updated!');
+    getOtherScore();
   }).catch(function(error) {
     console.error('Error updating user score:', error);
   });
@@ -921,7 +922,7 @@ function calculateRanking() {
 // Get other score and update teams
 function getOtherScore() {
   var otherIndex = part == 1 ? 1 : 0;
-  var otherUid = teamDocs.data().members[otherIndex];
+  var otherUid = teamDoc.data().members[otherIndex];
 
   var db = firebase.firestore();
   var usersRef = db.collection('users').where('uid', '==', otherUid);
