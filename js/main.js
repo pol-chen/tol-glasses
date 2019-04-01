@@ -881,7 +881,7 @@ function countPoint() {
 }
 
 function calculateScore() {
-  var teammate = getRandomInt(0, total);
+  var teammate = getRandomInt(7, total);
   console.log('SCORE TEAMMATE', teammate);
   var avg = (score + teammate).toFixed(1) / 2.0;
   $('#score').text(avg);
@@ -949,6 +949,7 @@ $(document).ready(function () {
       showScene('#scene-quizzed');
       updateStatus();
       updateScore(score);
+      $('.score-mine').text(score);
       console.log('SCORE', score);
     } else {
       showScene('#scene-question-q', loadQuiz);
@@ -1125,6 +1126,9 @@ $(document).ready(function () {
         showSceneByStatus(user.status);
         if (user.status > 1) {
           getTeam(user.tid, getPart);
+          // Update score
+          score = user.score;
+          $('.score-mine').text(user.score);
         }
       }, function() {
         console.log('INIT USER');
