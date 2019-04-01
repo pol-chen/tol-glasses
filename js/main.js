@@ -622,20 +622,20 @@ var currentPractice = 0;
 
 function getQuestions() {
   // Get questions from cloud
-  console.log('Practice');
+  console.log('QUESTION');
   loadPractice(); // Init first question
   loadQuiz();
 }
 
 function loadPractice() {
-  console.log('Load');
+  console.log('PRACTICE');
   var mine = part - 1;
   practicesMine = practices[mine];
 
   var p = practicesMine[currentPractice++];
   $('#scene-question-p h2').text('Question ' + currentPractice);
   $('#scene-question-p p').text(p.desc);
-  if (p.image.length >= 0) {
+  if (p.image.length > 0) {
     $('#scene-question-p p').append('<img src="images/' + p.image + '" alt="">');
   }
   $('#scene-question-p .btn-continue').addClass('btn-disabled');
@@ -857,11 +857,12 @@ var quizzes = [{
 var currentQuiz = 0;
 
 function loadQuiz() {
+  console.log('QUIZ');
   var p = quizzes[currentQuiz++];
   $('#scene-question-q h2').text('Question ' + currentQuiz);
   $('#scene-question-q p').text(p.desc);
   $('#scene-question-q .btn-continue').addClass('btn-disabled');
-  if (p.image.length >= 0) {
+  if (p.image.length > 0) {
     $('#scene-question-q p').append('<img src="images/' + p.image + '" alt="">');
   }
   $('#scene-question-q .select').empty();
