@@ -12,7 +12,7 @@ var videoIds = ['1thS_9B88tk', 'Zjgv-J6M4SQ', 'WeN2vdZZ5G0'];
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
     height: '640',
-    width: '900',
+    width: '960',
     videoId: videoIds[0],
     events: {
       'onReady': onPlayerReady,
