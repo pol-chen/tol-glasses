@@ -189,8 +189,8 @@ main {
   text-align: center;
 }
 
-.scene p.shrink {
-  margin: 0 auto;
+.scene .shrink {
+  margin-bottom: 0 !important;
 }
 
 .scene p b {

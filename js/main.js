@@ -394,8 +394,14 @@ function getPart(teamDoc) {
   part = team.assign[index];
   console.log('PART', part);
 
+  updatePart(part);
   updateChecklist(part);
   getQuestions();
+}
+
+function updatePart(part) {
+  var parts = ['Part A: How does the eye work', 'Part B: How do glasses change the path of light'];
+  $('.assigned-part').text(parts[part - 1]);
 }
 
 function updateTeamIcon(icon) {
