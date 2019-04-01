@@ -164,11 +164,11 @@ function showSceneByStatus(status) {
 // Template
 
 function buildOptionTeam(tid, name, icon, isNew) {
-  var count = isNew ? '' : '<br/>[1/2]';
+  // var count = isNew ? '' : '<br/>[1/2]';
   var line = isNew ? '<br/>' : ' ';
   return '<div class="frame option" data-next="' + tid + '">\
     <p><i class="fas fa-' + icon + '"></i></p>\
-    <p>Team' + line + name + count + '</p>\
+    <p>Team' + line + name + '</p>\
   </div>';
 }
 
