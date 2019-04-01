@@ -98,7 +98,7 @@ function startScene(scene) {
 }
 function continueScene(el) {
   var next = $(el).data('next');
-  console.log(next);
+  console.log('NEXT', next);
   $(el).parent('.scene').fadeOut(function () {
     if (next.includes('scene-correct-q')) {
       countPoint();
@@ -1040,6 +1040,7 @@ $(document).ready(function () {
         updateUserTeam(tid);
         schedule(tid);
         getTeam(tid, getPart);
+        showScene('#scene-joined');
       } else {
         console.log('JOIN NULL');
       }
@@ -1056,6 +1057,7 @@ $(document).ready(function () {
         updateUserTeam(tid);
         schedule(tid);
         getTeam(tid, getPart);
+        showScene('#scene-joined');
       } else {
         console.log('JOIN NULL');
       }
