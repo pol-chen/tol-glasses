@@ -334,11 +334,14 @@ function updateTeams(teamDocs) {
   $teamSelectFound.empty();
   var count = 0;
   var max = 4;
+  var countFound = 0;
+  var maxFound = 6;
   teamDocs.forEach(function(teamDoc) {
     var team = teamDoc.data();
-    console.log(team);
-    if (team.members.length == 0) {
+    // console.log(team);
+    if (countFound <= maxFound && team.members.length == 0) {
       $teamSelectFound.append(buildOptionTeam(teamDoc.id, team.name, team.icon, true));
+      countFound++;
     }
     if (count <= max && team.members.length == 1) {
       $teamSelect.append(buildOptionTeam(teamDoc.id, team.name, team.icon, false));
