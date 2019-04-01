@@ -519,12 +519,12 @@ var practices = [
       {
         desc: 'Retina',
         correct: false,
-        feedback: 'Try again! Retina does not refract light, it is where light gets focused in a person who has perfect vision.'
+        feedback: 'Ooops! Retina does not refract light, it is where light gets focused in a person who has perfect vision.'
       },
       {
         desc: 'Glass',
         correct: false,
-        feedback: 'Try again! Light enters the eye through the pupil, but pupil does not refracts light.'
+        feedback: 'Ooops! Light enters the eye through the pupil, but pupil does not refracts light.'
       }
     ]
   }, {
@@ -534,12 +534,12 @@ var practices = [
       {
         desc: 'In between lens and retina',
         correct: false,
-        feedback: 'Try again! When light gets focused before the retina, the person will have a blurry vision.'
+        feedback: 'Ooops! When light gets focused before the retina, the person will have a blurry vision.'
       },
       {
         desc: 'Cornea and Lens',
         correct: false,
-        feedback: 'Try again! Cornea and lens are where light gets refracted, not where light gets focused in order to have perfect vision.'
+        feedback: 'Ooops! Cornea and lens are where light gets refracted, not where light gets focused in order to have perfect vision.'
       },
       {
         desc: 'Retina',
@@ -554,7 +554,7 @@ var practices = [
       {
         desc: 'Hyperopia and hypermetropia',
         correct: false,
-        feedback: 'Try again! When light gets focused before the retina, the person will have a blurry vision.'
+        feedback: 'Ooops! When light gets focused before the retina, the person will have a blurry vision.'
       },
       {
         desc: 'Myopia',
@@ -564,7 +564,7 @@ var practices = [
       {
         desc: 'Farsightedness',
         correct: false,
-        feedback: 'Try again! Try again! Farsightedness is also called hyperopia or hypermetropia, which is the defect when light gets focused behind the retina.'
+        feedback: 'Ooops! Farsightedness is also called hyperopia or hypermetropia, which is the defect when light gets focused behind the retina.'
       }
     ]
   }],
@@ -580,7 +580,7 @@ var practices = [
       {
         desc: 'Glasses makes the light brighter.',
         correct: false,
-        feedback: 'Try again! Lenses do not affect the brightness of light. It helps with vision by changing the path of light.'
+        feedback: 'Ooops! Lenses do not affect the brightness of light. It helps with vision by changing the path of light.'
       },
       {
         desc: 'Glasses always expand light so that the light gets closer to the retina.',
@@ -625,7 +625,7 @@ var practices = [
       {
         desc: 'Either Concave or Convex will have same effect',
         correct: false,
-        feedback: 'Try again! Convex lens and concave lens change the path of light differently, only one type of lens would be correct.'
+        feedback: 'Ooops! Convex lens and concave lens change the path of light differently, only one type of lens would be correct.'
       }
     ]
   }]
@@ -698,12 +698,12 @@ var quizzes = [{
     {
       desc: 'Retina',
       correct: false,
-      feedback: 'Try again! Retina does not refract light, it is where light gets focused in a person who has perfect vision.'
+      feedback: 'Ooops! Retina does not refract light, it is where light gets focused in a person who has perfect vision.'
     },
     {
       desc: 'Pupil',
       correct: false,
-      feedback: 'Try again! Light enters the eye through the pupil, but pupil does not refracts light.'
+      feedback: 'Ooops! Light enters the eye through the pupil, but pupil does not refracts light.'
     }
   ]
 }, {
@@ -713,12 +713,12 @@ var quizzes = [{
     {
       desc: 'In between lens and retina.',
       correct: false,
-      feedback: 'Try again! When light gets focused before the retina, the person will have a blurry vision.'
+      feedback: 'Ooops! When light gets focused before the retina, the person will have a blurry vision.'
     },
     {
       desc: 'Cornea and Lens',
       correct: false,
-      feedback: 'Try again! Cornea and lens are where light gets refracted, not where light gets focused in order to have perfect vision.'
+      feedback: 'Ooops! Cornea and lens are where light gets refracted, not where light gets focused in order to have perfect vision.'
     },
     {
       desc: 'Retina',
@@ -733,7 +733,7 @@ var quizzes = [{
     {
       desc: 'Hyperopia and hypermetropia',
       correct: false,
-      feedback: 'Try again! Hyperopia or hypermetropia is also called farsightedness, which is the defect when light gets focused behind the retina'
+      feedback: 'Ooops! Hyperopia or hypermetropia is also called farsightedness, which is the defect when light gets focused behind the retina'
     },
     {
       desc: 'Myopia',
@@ -743,7 +743,7 @@ var quizzes = [{
     {
       desc: 'Farsightedness',
       correct: false,
-      feedback: 'Try again! Try again! Farsightedness is also called hyperopia or hypermetropia, which is the defect when light gets focused behind the retina.'
+      feedback: 'Ooops! Farsightedness is also called hyperopia or hypermetropia, which is the defect when light gets focused behind the retina.'
     }
   ]
 }, {
@@ -773,7 +773,7 @@ var quizzes = [{
     {
       desc: 'A',
       correct: false,
-      feedback: 'Not quite right, try again! It is true that the image shows a convex lens, however, convex lens does not help with myopia.'
+      feedback: 'Not quite right, Ooops! It is true that the image shows a convex lens, however, convex lens does not help with myopia.'
     },
     {
       desc: 'B',
@@ -793,7 +793,7 @@ var quizzes = [{
     {
       desc: 'Grandma Rose has myopic eyes.',
       correct: false,
-      feedback: 'Try again! If grandma Rose has myopic eyes, then she would have trouble seeing distance objects.'
+      feedback: 'Ooops! If grandma Rose has myopic eyes, then she would have trouble seeing distance objects.'
     },
     {
       desc: 'Grandma Rose has farsightedness.',
@@ -803,7 +803,7 @@ var quizzes = [{
     {
       desc: 'The light passing through Grandma Rose gets focused before her retina.',
       correct: false,
-      feedback: 'Try again! If the light gets focused before the retina, then grandma Rose would be able to see objects close up clearly.'
+      feedback: 'Ooops! If the light gets focused before the retina, then grandma Rose would be able to see objects close up clearly.'
     }
   ]
 }, {
@@ -813,12 +813,12 @@ var quizzes = [{
     {
       desc: 'When light gets focused before the retina, convex lens would help.',
       correct: false,
-      feedback: 'Try again! When light is focused before the retina, we need to use concave lens to expand the light to help with vision.'
+      feedback: 'Ooops! When light is focused before the retina, we need to use concave lens to expand the light to help with vision.'
     },
     {
       desc: 'For myopic eyes, a pair of glasses with convex lens would help.',
       correct: false,
-      feedback: 'Try again! For myopic eyes, light is focused before the retina, in this case, we need to use concave lens to expand the light to help with vision.'
+      feedback: 'Ooops! For myopic eyes, light is focused before the retina, in this case, we need to use concave lens to expand the light to help with vision.'
     },
     {
       desc: 'When light gets focused behind the retina, convex lens would help.',
@@ -838,7 +838,7 @@ var quizzes = [{
     {
       desc: 'Glasses makes the light brighter.',
       correct: false,
-      feedback: 'Try again! Lenses do not affect the brightness of light. It helps with vision by changing the path of light.'
+      feedback: 'Ooops! Lenses do not affect the brightness of light. It helps with vision by changing the path of light.'
     },
     {
       desc: 'Glasses always expand light so that the light gets closer to the retina.',
@@ -863,7 +863,7 @@ var quizzes = [{
     {
       desc: 'Either Concave or Convex will have same effect',
       correct: false,
-      feedback: 'Try again! Convex lens and concave lens change the path of light differently, only one type of lens would be correct.'
+      feedback: 'Ooops! Convex lens and concave lens change the path of light differently, only one type of lens would be correct.'
     }
   ]
 }];
