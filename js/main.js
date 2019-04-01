@@ -455,10 +455,24 @@ function updateTeamRanking(ranking) {
   });
 }
 
-function schedule(tid) {
-  // Schedule
+function assign(tid) {
   var rand = getRandomInt(1, 2);
   var left = rand == 1 ? 2 : 1;
+  var data = {
+    assign: [rand, left]
+  };
+  console.log('ASSIGN', data);
+  // Update cloud team
+  var db = firebase.firestore();
+  var teamRef = db.collection('teams').doc(tid);
+  return teamRef.update(data).then(function() {
+    console.log('Team successfully updated!');
+  }).catch(function(error) {
+    console.error('Error updating team:', error);
+  });
+}
+
+function schedule(tid) {
   var dt = new Date();
   if (dt.getHours() >= 18) {
     dt.setTime(dt.getTime() + (24 * 60 * 60 * 1000));
@@ -467,11 +481,10 @@ function schedule(tid) {
   var discussAt = new Date(date + 'T19:00:00');
   var teachAt = new Date(date + 'T20:00:00');
   var data = {
-    assign: [rand, left],
     discussAt: discussAt,
     teachAt: teachAt
   };
-  console.log('SCHEDULE', date + 'T19:00:00', discussAt, data);
+  console.log('SCHEDULE', data);
   // Update cloud team
   var db = firebase.firestore();
   var teamRef = db.collection('teams').doc(tid);
@@ -1053,7 +1066,7 @@ $(document).ready(function () {
         console.log('JOIN', tid, uid);
         updateStatus();
         updateUserTeam(tid);
-        // schedule(tid);
+        schedule(tid);
         getTeam(tid, getPart);
         showScene('#scene-joined');
       } else {
@@ -1070,6 +1083,7 @@ $(document).ready(function () {
         console.log('FOUND', tid, uid);
         updateStatus();
         updateUserTeam(tid);
+        assign(tid);
         schedule(tid);
         getTeam(tid, getPart);
         showScene('#scene-joined');
