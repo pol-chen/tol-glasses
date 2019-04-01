@@ -407,11 +407,10 @@ function updateTeamInfo() {
   var team = teamDoc.data();
   updateTeamIcon(team.icon);
   if (team.discussAt) {
-    console.log('TIME', team.discussAt);
-    $('.discuss-time').text(new Date(team.discussAt.seconds * 1000).toString());
+    $('.discuss-time').text(new Date(team.discussAt.seconds * 1000).toLocaleString());
   }
   if (team.teachAt) {
-    $('.teach-time').text(new Date(team.teachAt.seconds * 1000).toString());
+    $('.teach-time').text(new Date(team.teachAt.seconds * 1000).toLocaleString());
   }
   if (team.score) {
     $('#score').text(team.score);
@@ -450,8 +449,11 @@ function schedule(tid) {
   // Schedule
   var rand = getRandomInt(1, 2);
   var left = rand == 1 ? 2 : 1;
-  var now = new Date();
-  var date = now.getFullYear() + '-' + addZero(now.getMonth() + 1) + '-' + addZero(now.getDate() + (now.getHours() >= 18 ? 1 : 0));
+  var dt = new Date();
+  if (dt.getHours() >= 18) {
+    dt.setTime(dt.getTime() + (24 * 60 * 60 * 1000));
+  }
+  var date = dt.getFullYear() + '-' + addZero(dt.getMonth() + 1) + '-' + addZero(dt.getDate());
   var discussAt = new Date(date + 'T19:00:00');
   var teachAt = new Date(date + 'T20:00:00');
   var data = {
@@ -459,6 +461,7 @@ function schedule(tid) {
     discussAt: discussAt,
     teachAt: teachAt
   };
+  console.log('SCHEDULE', date + 'T19:00:00', discussAt, data);
   // Update cloud team
   var db = firebase.firestore();
   var teamRef = db.collection('teams').doc(tid);
