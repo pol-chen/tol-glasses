@@ -493,12 +493,12 @@ var practices = [
       {
         desc: 'Retina',
         correct: false,
-        feedback: 'Try again! Retina does not refract light, it is where light get focused in a person who has perfect vision'
+        feedback: 'Try again! Retina does not refract light, it is where light get focused in a person who has perfect vision.'
       },
       {
         desc: 'Glass',
         correct: false,
-        feedback: 'Try again! Light enters the eye through the pupil, but pupil does not refracts light'
+        feedback: 'Try again! Light enters the eye through the pupil, but pupil does not refracts light.'
       }
     ]
   }, {
@@ -508,17 +508,17 @@ var practices = [
       {
         desc: 'In between lens and retina',
         correct: false,
-        feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision'
+        feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision.'
       },
       {
         desc: 'Cornea and Lens',
         correct: false,
-        feedback: 'Try again! Cornea and lens are where light gets refracted, not where light gets focused in order to have perfect vision'
+        feedback: 'Try again! Cornea and lens are where light gets refracted, not where light gets focused in order to have perfect vision.'
       },
       {
         desc: 'Retina',
         correct: true,
-        feedback: 'Good job! In a person who has perfect vision, the refracted light is actually focused on the retina'
+        feedback: 'Good job! In a person who has perfect vision, the refracted light is actually focused on the retina.'
       }
     ]
   }, {
@@ -528,17 +528,17 @@ var practices = [
       {
         desc: 'Hyperopia and hypermetropia',
         correct: false,
-        feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision'
+        feedback: 'Try again! When light get focused before the retina, the person will have a blurry vision.'
       },
       {
         desc: 'Myopia',
         correct: true,
-        feedback: 'Good job! Myopia is also called nearsightedness, which causes blurry vision when looking at distant objects'
+        feedback: 'Good job! Myopia is also called nearsightedness, which causes blurry vision when looking at distant objects.'
       },
       {
         desc: 'Farsightedness',
         correct: false,
-        feedback: 'Try again! Try again! Farsightedness is also called hyperopia or hypermetropia, which is the defect when light gets focused behind the retina'
+        feedback: 'Try again! Try again! Farsightedness is also called hyperopia or hypermetropia, which is the defect when light gets focused behind the retina.'
       }
     ]
   }],
