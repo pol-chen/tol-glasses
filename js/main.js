@@ -892,7 +892,7 @@ var checklists = [
   [
     'Eye structure',
     'What causes blurry vision',
-    'Differences between myopic and hyperopia'
+    'Differences between myopia and hyperopia'
   ], [
     'Different types of lenses',
     'How do lenses change the path of light',
