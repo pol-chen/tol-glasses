@@ -623,13 +623,12 @@ function loadPractice() {
   $('#scene-question-p h2').text('Question ' + currentPractice);
   $('#scene-question-p p').text(p.desc);
   if (p.image.length >= 0) {
-    console.log(p.image);
     $('#scene-question-p p').append('<img src="images/' + p.image + '" alt="">');
   }
   $('#scene-question-p .btn-continue').addClass('btn-disabled');
   $('#scene-question-p .select').empty();
   p.options.forEach(function(option, i) {
-    console.log(option, i);
+    // console.log(option, i);
     $('#scene-question-p .select').append(buildOptionQuestionP(option, i));
     if (option.correct) {
       $('#scene-correct-p p').text(option.feedback);
@@ -849,9 +848,12 @@ function loadQuiz() {
   $('#scene-question-q h2').text('Question ' + currentQuiz);
   $('#scene-question-q p').text(p.desc);
   $('#scene-question-q .btn-continue').addClass('btn-disabled');
+  if (p.image.length >= 0) {
+    $('#scene-question-q p').append('<img src="images/' + p.image + '" alt="">');
+  }
   $('#scene-question-q .select').empty();
   p.options.forEach(function(option, i) {
-    console.log(option, i);
+    // console.log(option, i);
     $('#scene-question-q .select').append(buildOptionQuestionQ(option, i));
     if (option.correct) {
       $('#scene-correct-q p').text(option.feedback);
