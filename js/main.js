@@ -382,7 +382,6 @@ function getTeam(tid, success) {
       console.log('TEAM', doc.data());
       teamDoc = doc;
       updateTeamInfo();
-      getOtherScore();
       success(teamDoc);
     } else {
       console.log('No such team!');
@@ -403,6 +402,7 @@ function getPart(teamDoc) {
   updatePart(part);
   updateChecklist(part);
   getQuestions();
+  getOtherScore();
 }
 
 function updatePart(part) {
