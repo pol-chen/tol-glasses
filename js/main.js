@@ -335,7 +335,7 @@ function updateTeams(teamDocs) {
   $teamSelect.empty();
   $teamSelectFound.empty();
   var count = 0;
-  var max = 3;
+  var max = 8;
   var countFound = 0;
   var maxFound = 6;
   teamDocs.forEach(function(teamDoc) {
