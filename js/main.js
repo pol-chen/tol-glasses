@@ -204,6 +204,7 @@ function login(email, password) {
     var errorCode = error.code;
     var errorMessage = error.message;
     console.log('LOGIN', errorCode, errorMessage);
+    alert(errorMessage);
   });
 }
 
@@ -213,6 +214,7 @@ function signup(email, password) {
     var errorCode = error.code;
     var errorMessage = error.message;
     console.log('SIGNUP', errorCode, errorMessage);
+    alert(errorMessage);
   });
 }
 
