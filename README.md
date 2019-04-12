@@ -1,6 +1,6 @@
 # How Glasses Work
 
-This project is for **Tools for Online Learning** at CMU.
+This project is for **Tools for Online Learning** at CMU HCII.
 
 The project uses these following codes/libraries:
 
