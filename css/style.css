@@ -340,6 +340,22 @@ main {
   margin-bottom: 24px;
 }
 
+#btn-restart {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  height: 18px;
+  width: 18px;
+  font-size: 18px;
+  color: #4CBBD8;
+  cursor: pointer;
+  transition: .3s all ease-in-out;
+}
+
+#btn-restart:hover {
+  color: #2C9DBA;
+}
+
 #player {
 }
 
