@@ -270,6 +270,19 @@ function initUser(auth) {
   });
 }
 
+function resetStatus() {
+  var db = firebase.firestore();
+  var userRef = db.collection('users').doc(userDoc.id);
+  return userRef.update({
+    status: 0
+  }).then(function() {
+    console.log('User successfully resetted!');
+    showSceneByStatus(0);
+  }).catch(function(error) {
+    console.error('Error resetting user:', error);
+  });
+}
+
 function updateStatus() {
   var db = firebase.firestore();
   var userRef = db.collection('users').doc(userDoc.id);
@@ -971,9 +984,7 @@ function loadChecklist(el, items) {
   });
 }
 
-$(document).ready(function () {
-  showBoard();
-  $('#scene-blank').show();
+function registerEvents() {
 
   // Global Events
   $('.btn-continue').click(function () {
@@ -1156,6 +1167,16 @@ $(document).ready(function () {
     calculateRanking();
     $('#scene-quizzed a').removeClass('btn-disabled');
   })
+  $('#btn-restart').click(function () {
+    resetStatus();
+  })
+}
+
+$(document).ready(function () {
+  showBoard();
+  $('#scene-blank').show();
+
+  registerEvents();
 
   // Listen user state change
   firebase.auth().onAuthStateChanged(function(auth) {
