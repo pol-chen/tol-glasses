@@ -367,6 +367,67 @@ function updateTeams(teamDocs) {
   });
 }
 
+function updateCloudTeams(teamDocs) {
+  console.log('updateCloudTeams');
+  var countZero = 0;
+  var countOne = 0;
+  var teamTwo = [];
+  var teamExist = [];
+  teamDocs.forEach(function(teamDoc) {
+    var team = teamDoc.data();
+    console.log(team);
+    if (team.members.length == 0) {
+      countZero++;
+      teamExist.push(team.name+'+'+team.icon);
+    } else if (team.members.length == 1) {
+      countOne++;
+      teamExist.push(team.name+'+'+team.icon);
+    } else if (team.members.length == 2) {
+      teamTwo.push(team.name+'+'+team.icon);
+    }
+  });
+  console.log('countZero', countZero);
+  console.log('countOne', countOne);
+  console.log('teamTwo', teamTwo);
+  var teamUni = teamTwo.reduce(function(a, b){
+    if (a.indexOf(b) < 0 ) a.push(b);
+    return a;
+  }, []);
+  console.log('teamUni', teamUni);
+  teamNew = teamUni.filter(x => !teamExist.includes(x));
+  console.log('teamNew', teamNew);
+  var indexNew = 0;
+  for (var i = countZero; i < 6; i++) {
+    console.log('create team for zero');
+    if (indexNew < teamNew.length) {
+      var team = teamNew[indexNew++].split('+');
+      createTeam(team[0], team[1], []);
+    }
+  }
+  for (var i = countOne; i < 6; i++) {
+    console.log('create team for one');
+    if (indexNew < teamNew.length) {
+      var team = teamNew[indexNew++].split('+');
+      createTeam(team[0], team[1], ['O95iYo0zhfNw6ZtFUed6PcN49Eq1']);
+    }
+  }
+}
+
+function createTeam(name, icon, members) {
+  console.log('createTeam', name, icon);
+  var db = firebase.firestore();
+  db.collection('teams').add({
+    name: name,
+    icon: icon,
+    members: members
+  }).then(function(docRef) {
+    console.log('Team written with ID:', docRef.id);
+    userDoc = docRef;
+  }).catch(function(error) {
+    console.error('Error adding team:', error);
+  });
+}
+
 function joinTeam(tid, uid) {
   var db = firebase.firestore();
   var teamRef = db.collection('teams').doc(tid);
@@ -1177,6 +1238,8 @@ $(document).ready(function () {
   $('#scene-blank').show();
 
   registerEvents();
+
+  getTeams(updateCloudTeams);
 
   // Listen user state change
   firebase.auth().onAuthStateChanged(function(auth) {
